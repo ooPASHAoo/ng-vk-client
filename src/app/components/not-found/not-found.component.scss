@@ -1,0 +1,16 @@
+.error {
+  padding: 60px 15px;
+  text-align: center;
+
+  &__title {
+  }
+
+  &__actions {
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  &__btn:not(:last-child) {
+    margin-right: 10px;
+  }
+}
