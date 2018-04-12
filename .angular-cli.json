@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "pg",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "assets/bootstrap.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
