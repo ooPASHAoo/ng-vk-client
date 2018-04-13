@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {OAUTH_EVENT, OauthVkService} from '../../services/vk-oauth.service';
-import {VkTokenParserService} from '../../../../shared/services/vk-token-parser.service';
+import {VkTokenParserService} from '../../services/vk-token-parser.service';
 import {VkTokenModel} from '../../../../shared/models/vk-token.model';
 import {VkTokenStorageService} from '../../../../shared/services/vk-token-storage.service';
 

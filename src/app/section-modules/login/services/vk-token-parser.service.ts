@@ -1,4 +1,4 @@
-import {VkTokenModel} from '../models/vk-token.model';
+import {VkTokenModel} from '../../../shared/models/vk-token.model';
 
 export class VkTokenParserService {
 
