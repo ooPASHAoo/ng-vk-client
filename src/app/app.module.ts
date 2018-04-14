@@ -21,5 +21,4 @@ import {AuthGuard} from './shared/guards/auth-guard.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  // Коммит специально для CSSSR =)
 }
