@@ -64,7 +64,7 @@ export class VkTokenParserService {
       }
 
       const currentDate = new Date();
-      const expiresDate = new Date(currentDate.getTime() + expiresNum);
+      const expiresDate = new Date(currentDate.getTime() + expiresNum * 1000);
 
       const tokenModel = new VkTokenModel(token, expiresDate, userId);
       resolve(tokenModel);
