@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {VkTokenModel} from '../../core/vk-api/token/models/vk-token.model';
+import {VkTokenService} from '../../core/vk-api/token/services/vk-token.service';
 
 @Component({
   selector: 'pg-analyzer',
@@ -7,10 +9,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AnalyzerComponent implements OnInit {
 
-  constructor() {
+  token: VkTokenModel;
+
+  constructor(private _tokenService: VkTokenService) {
   }
 
   ngOnInit() {
+    this.token = this._tokenService.getActualLocalToken();
   }
 
 }

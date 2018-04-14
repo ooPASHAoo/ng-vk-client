@@ -15,7 +15,7 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
     AnalyzerComponent,
     HeaderComponent,
     SidebarComponent
-  ]
+  ],
 })
 export class AnalyzerModule {
 }

@@ -3,9 +3,9 @@ import {Router} from '@angular/router';
 
 import {OAUTH_EVENT} from '../../../../core/vk-api/oauth/vk-oauth.const';
 import {OauthVkService} from '../../../../core/vk-api/oauth/vk-oauth.service';
-import {VkTokenParserService} from '../../../../core/vk-api/token/vk-token-parser.service';
+import {VkTokenParserService} from '../../../../core/vk-api/token/services/vk-token-parser.service';
 import {VkTokenModel} from '../../../../core/vk-api/token/models/vk-token.model';
-import {VkTokenStorageService} from '../../../../core/vk-api/token/vk-token-storage.service';
+import {VkTokenStorageService} from '../../../../core/vk-api/token/services/vk-token-storage.service';
 
 @Component({
   selector: 'pg-auth',

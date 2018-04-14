@@ -3,10 +3,4 @@ export class VkTokenModel {
               public expires: Date,
               public userId: string) {
   }
-
-  isExpired(): boolean {
-    const now = new Date();
-    const timeLeft = this.expires.getTime() - now.getTime();
-    return timeLeft > 0;
-  }
 }
