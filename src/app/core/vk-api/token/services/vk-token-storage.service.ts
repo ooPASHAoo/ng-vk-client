@@ -1,7 +1,10 @@
+import {Injectable} from '@angular/core';
+
 import {VkTokenModel} from '../models/vk-token.model';
 
 const STORAGE_KEY = 'PG_VK_TOKEN_STORAGE_KEY';
 
+@Injectable()
 export class VkTokenStorageService {
 
   /** @throws JSON.stringify(token) */

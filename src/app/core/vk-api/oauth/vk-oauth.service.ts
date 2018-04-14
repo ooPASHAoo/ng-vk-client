@@ -1,7 +1,10 @@
+import {Injectable} from '@angular/core';
 import {HttpParams} from '@angular/common/http';
+
 import {OAUTH_REDIRECT_URI} from './vk-oauth.const';
 import {VK_APP_ID} from '../vk-api.const';
 
+@Injectable()
 export class OauthVkService {
 
   /** redirect with result to OAUTH_REDIRECT_URI */

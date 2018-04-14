@@ -1,5 +1,8 @@
+import {Injectable} from '@angular/core';
+
 import {VkTokenModel} from '../models/vk-token.model';
 
+@Injectable()
 export class VkTokenParserService {
 
   parseHash(hash: string): Promise<VkTokenModel> {
