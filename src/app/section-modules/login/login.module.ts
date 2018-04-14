@@ -5,9 +5,9 @@ import {LoginComponent} from './login.component';
 import {LoginRoutingModule} from './login-routing.module';
 import {OauthCallbackComponent} from './pages/oauth-callback/oauth-callback.component';
 import {AuthComponent} from './pages/auth/auth.component';
-import {OauthVkService} from './services/vk-oauth.service';
-import {VkTokenParserService} from './services/vk-token-parser.service';
-import {VkTokenStorageService} from '../../shared/services/vk-token-storage.service';
+import {OauthVkService} from '../../core/vk-api/oauth/vk-oauth.service';
+import {VkTokenParserService} from '../../core/vk-api/token/vk-token-parser.service';
+import {VkTokenStorageService} from '../../core/vk-api/token/vk-token-storage.service';
 
 @NgModule({
   imports: [

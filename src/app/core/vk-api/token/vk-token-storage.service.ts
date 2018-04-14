@@ -1,4 +1,4 @@
-import {VkTokenModel} from '../models/vk-token.model';
+import {VkTokenModel} from './models/vk-token.model';
 
 const STORAGE_KEY = 'PG_VK_TOKEN_STORAGE_KEY';
 

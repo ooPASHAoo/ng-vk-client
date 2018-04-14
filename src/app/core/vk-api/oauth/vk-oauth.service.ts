@@ -1,20 +1,15 @@
 import {HttpParams} from '@angular/common/http';
-
-export const OAUTH_EVENT = 'PGOAuthResult';
-
-/** VK App id */
-const client_id = '6446573';
-/** VK App settings */
-const redirect_uri = 'http://localhost:4200/login/oauth-callback';
+import {OAUTH_REDIRECT_URI} from './vk-oauth.const';
+import {VK_APP_ID} from '../vk-api.const';
 
 export class OauthVkService {
 
   public getAuthUrl(): string {
     const params = new HttpParams()
-      .set('client_id', client_id)
+      .set('client_id', VK_APP_ID)
       .set('display', 'popup')
       .set('revoke', '1')
-      .set('redirect_uri', redirect_uri)
+      .set('redirect_uri', OAUTH_REDIRECT_URI)
       .set('scope', 'friends')
       .set('response_type', 'token')
       .set('v', '5.74');
