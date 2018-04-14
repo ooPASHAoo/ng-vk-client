@@ -39,15 +39,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   // --- actions --- //
 
   onLogin() {
-    const width = 720;
-    const height = 360;
-    const left = (screen.width / 2) - (width / 2);
-    const top = (screen.height / 2) - (height / 2);
-    const windowOptions = `width=${width},height=${height},top=${top},left=${left}`;
-
-    const oauthLink = this._oauthVk.getAuthUrl();
-
-    window.open(oauthLink, 'OAuthVK', windowOptions);
+    this._oauthVk.showPopupAuth();
   }
 
   // --- private --- //
