@@ -9,11 +9,17 @@ export class VkTokenService {
   constructor(private _tokenStorage: VkTokenStorageService) {
   }
 
+  isHasActualLocalToken(): boolean {
+    return !!this.getActualLocalToken();
+  }
+
   getActualLocalToken() {
     // TODO: Different error. TokenError->expired
     try {
+
       const token = this._tokenStorage.getToken();
       return (this._isExpired(token)) ? null : token;
+
     } catch (err) {
       return null;
     } finally {
