@@ -1,0 +1,13 @@
+<div *ngIf="!isLoaded">
+  <!-- TODO: Loading component -->
+  <p>Загрузка записей...</p>
+</div>
+<div *ngIf="isLoaded && !hasLoadError">
+
+  <pg-post *ngFor="let post of postsList" [post]="post"></pg-post>
+
+</div>
+
+<div *ngIf="isLoaded && hasLoadError">
+  <div class="btn btn-info" (click)="onRefresh()">Попробовать еще раз.</div>
+</div>

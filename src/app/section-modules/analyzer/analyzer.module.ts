@@ -5,22 +5,30 @@ import {AnalyzerRoutingModule} from './analyzer-routing.module';
 import {AnalyzerComponent} from './analyzer.component';
 import {HeaderComponent} from './components/header/header.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
-import { TestPage1Component } from './pages/test-page1/test-page1.component';
-import { TestPage11Component } from './pages/test-page1-1/test-page1-1.component';
-import { TestPage2Component } from './pages/test-page2/test-page2.component';
+import {FriendsComponent} from './pages/friends/friends.component';
+import {FeedComponent} from './pages/feed/feed.component';
+import {UserComponent} from './pages/user/user.component';
+import {VkApiModule} from '../../core/vk-api/methods/vk-api.module';
+import {PostComponent} from './pages/user/components/posts-list/components/post/post.component';
+import {UserInfoComponent} from './pages/user/components/user-info/user-info.component';
+import {PostsListComponent} from './pages/user/components/posts-list/posts-list.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    AnalyzerRoutingModule
+    AnalyzerRoutingModule,
+    VkApiModule
   ],
   declarations: [
     AnalyzerComponent,
     HeaderComponent,
     SidebarComponent,
-    TestPage1Component,
-    TestPage11Component,
-    TestPage2Component
+    FriendsComponent,
+    FeedComponent,
+    UserComponent,
+    PostComponent,
+    UserInfoComponent,
+    PostsListComponent
   ],
 })
 export class AnalyzerModule {

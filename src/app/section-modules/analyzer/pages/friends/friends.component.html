@@ -1,0 +1,28 @@
+<div *ngIf="!isLoaded">
+  <!-- TODO: Loading component -->
+  <p>Загрузка...</p>
+</div>
+<div *ngIf="isLoaded && !hasLoadError">
+
+  <div *ngFor="let friend of friendsList"
+       class="card flex-row mb-2 user-item">
+    <img class="user-item__avatar" src="{{friend.photoUrl100}}">
+    <div class="card-body py-2">
+      <a class="user-item__name h5 mb-1 d-inline-block"
+         routerLink="../{{friend.id}}">
+        {{friend.firstName}} {{friend.lastName}}
+      </a>
+      <p class="mb-1"><span class="text-muted">Страна: </span>
+        {{friend.country ? friend.country : 'неизвесно'}}
+      </p>
+      <p class="mb-1"><span class="text-muted">Город: </span>
+        {{friend.city ? friend.city : 'неизвесно'}}
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isLoaded && hasLoadError">
+  <button type="button" class="btn btn-info" (click)="onRefresh()">Попробовать еще раз.</button>
+</div>
