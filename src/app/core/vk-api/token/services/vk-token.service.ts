@@ -13,21 +13,28 @@ export class VkTokenService {
     return !!this.getActualLocalToken();
   }
 
+  getCurrentUserId(): string {
+    const token = this._getLocalToken();
+    return token ? token.userId : null;
+  }
+
   getActualLocalToken() {
-    // TODO: Different error. TokenError->expired
-    try {
-
-      const token = this._tokenStorage.getToken();
-      return (this._isExpired(token)) ? null : token;
-
-    } catch (err) {
-      return null;
-    } finally {
-    }
+    const token = this._getLocalToken();
+    return (!this._isExpired(token)) ? token : null;
   }
 
   removeLocalToken() {
     this._tokenStorage.removeToken();
+  }
+
+  private _getLocalToken() {
+    // TODO: Different error. TokenError->expired
+    try {
+      return this._tokenStorage.getToken();
+    } catch (err) {
+      return null;
+    } finally {
+    }
   }
 
   private _isExpired(token: VkTokenModel): boolean {
