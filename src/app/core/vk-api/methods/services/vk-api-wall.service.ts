@@ -5,6 +5,9 @@ import {map} from 'rxjs/operators';
 
 import {VkApiServiceAbstract} from './vk-api.service.abstract';
 import {WallPost} from '../models/wall-post.model';
+import {User} from '../models/user.model';
+import {Group} from '../models/group.model';
+import {WallPostsList} from '../models/wall-posts-list.model';
 
 @Injectable()
 export class VkApiWallService extends VkApiServiceAbstract {
@@ -16,14 +19,15 @@ export class VkApiWallService extends VkApiServiceAbstract {
     return super.getDefaultParams()
       .set('order', 'hints')
       .set('count', '100')
-      .set('fields', 'photo_100,country,city');
+      .set('extended', '1')
+      .set('fields', 'photo_100');
   }
 
 
   // === public methods === //
 
 
-  getByOwnerId(ownerId: string): Observable<WallPost[]> {
+  getByOwnerId(ownerId: string): Observable<WallPostsList> {
     const params = this.getDefaultParams()
       .set('owner_id', ownerId);
 
@@ -34,16 +38,10 @@ export class VkApiWallService extends VkApiServiceAbstract {
 
   // --- private --- //
 
-  private _parseResponse(res: object): WallPost[] {
-    const postItemsList: Array<object>|null = res['items'];
-    if (!postItemsList) {
-      throw new Error('Wall posts items is empty');
-    }
-
-    // Парсит объекты в модели|null и фильтрует(Null) приводя к bool
-    const postsList = postItemsList.map(WallPost.parseItem).filter(Boolean);
+  private _parseResponse(res: object): WallPostsList {
+    const postsList = WallPostsList.parseItem(res);
     if (!postsList) {
-      throw new Error('Wall posts is empty');
+      throw new Error('Wall posts list is empty');
     }
 
     return postsList;

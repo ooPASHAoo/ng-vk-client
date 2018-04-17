@@ -5,6 +5,7 @@ import {VkApiWallService} from '../../../../../../core/vk-api/methods/services/v
 import {WallPost} from '../../../../../../core/vk-api/methods/models/wall-post.model';
 import {ApiError} from '../../../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../../../core/vk-api/methods/errors/token-error';
+import {WallPostsList} from '../../../../../../core/vk-api/methods/models/wall-posts-list.model';
 
 @Component({
   selector: 'pg-posts-list',
@@ -15,7 +16,7 @@ export class PostsListComponent implements OnInit {
 
   @Input() ownerId: string;
 
-  postsList: WallPost[];
+  postsList: WallPostsList;
   isLoaded = false;
   hasLoadError = false;
 
@@ -50,7 +51,7 @@ export class PostsListComponent implements OnInit {
       );
   }
 
-  private _responseSuccessHandler(res: WallPost[]) {
+  private _responseSuccessHandler(res: WallPostsList) {
     this.postsList = res;
 
     this.isLoaded = true;
