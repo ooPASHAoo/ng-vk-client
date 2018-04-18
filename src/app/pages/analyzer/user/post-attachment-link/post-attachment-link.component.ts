@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MediaLinkModel} from '../../../../../core/vk-api/methods/models/media-link.model';
+import {VkMediaLink} from '../../../../core/vk-api/methods/models/vk-media-link.model';
 
 @Component({
   selector: 'pg-post-attachment-link',
@@ -8,7 +8,7 @@ import {MediaLinkModel} from '../../../../../core/vk-api/methods/models/media-li
 })
 export class PostAttachmentLinkComponent implements OnInit {
 
-  @Input() attachmentLink: MediaLinkModel;
+  @Input() attachmentLinks: VkMediaLink[];
 
   constructor() { }
 

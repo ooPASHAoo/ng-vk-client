@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     const routeUserId = this._activatedRoute.snapshot.paramMap.get('id');
-    const token = this._vkTokenService.getActualLocalToken();
-    this.userId = routeUserId ? routeUserId : token.userId;
+    const userId = this._vkTokenService.getCurrentUserId();
+    this.userId = routeUserId ? routeUserId : userId;
   }
 }

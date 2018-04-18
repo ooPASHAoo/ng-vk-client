@@ -4,10 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 
 import {VkApiServiceAbstract} from './vk-api.service.abstract';
-import {WallPost} from '../models/wall-post.model';
-import {User} from '../models/user.model';
-import {Group} from '../models/group.model';
-import {WallPostsList} from '../models/wall-posts-list.model';
+import {VkPostsList} from '../models/vk-posts-list.model';
 
 @Injectable()
 export class VkApiWallService extends VkApiServiceAbstract {
@@ -23,28 +20,17 @@ export class VkApiWallService extends VkApiServiceAbstract {
       .set('fields', 'photo_100');
   }
 
-
-  // === public methods === //
-
-
-  getByOwnerId(ownerId: string): Observable<WallPostsList> {
+  getByOwnerId(ownerId: string): Observable<VkPostsList> {
     const params = this.getDefaultParams()
       .set('owner_id', ownerId);
 
     return this.httpJsonpGet(params).pipe(
-      map(this._parseResponse)
+      map(VkApiWallService._parseResponse)
     );
   }
 
-  // --- private --- //
-
-  private _parseResponse(res: object): WallPostsList {
-    const postsList = WallPostsList.parseItem(res);
-    if (!postsList) {
-      throw new Error('Wall posts list is empty');
-    }
-
-    return postsList;
+  private static _parseResponse(res: object): VkPostsList {
+    return VkPostsList.parseItem(res);
   }
 
 }

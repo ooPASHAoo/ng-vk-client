@@ -1,0 +1,8 @@
+<a *ngFor="let link of attachmentLinks"
+   class="card media-link p-0" href="{{link.url}}">
+  <img class="card-img-top media-link__img" src="{{link.photo?.url604}}">
+  <div class="card-body media-link__description">
+    <h5 class="card-title">{{link.title}}</h5>
+    <p class="card-text text-muted">{{link.caption}}</p>
+  </div>
+</a>

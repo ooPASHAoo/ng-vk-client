@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {VkTokenService} from '../../token/services/vk-token.service';
 import {AuthVkError} from '../errors/token-error';
 import {ApiError} from '../errors/api-error';
+import {Stp} from '../../../../shared/supports/safe-type-parser';
 
 @Injectable()
 export abstract class VkApiServiceAbstract {

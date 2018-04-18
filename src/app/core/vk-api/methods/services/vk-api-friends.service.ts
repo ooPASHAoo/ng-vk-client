@@ -4,8 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 
 import {VkApiServiceAbstract} from './vk-api.service.abstract';
-import {User} from '../models/user.model';
-
+import {VkUser} from '../models/vk-user.model';
+import {Stp} from '../../../../shared/supports/safe-type-parser';
 
 @Injectable()
 export class VkApiFriendsService extends VkApiServiceAbstract {
@@ -16,37 +16,21 @@ export class VkApiFriendsService extends VkApiServiceAbstract {
   protected getDefaultParams(): HttpParams {
     return super.getDefaultParams()
       .set('order', 'hints')
-      .set('fields', 'photo_100,country,city');
+      .set('fields', 'photo_100');
   }
 
-
-  // === public methods === //
-
-
-  getByUserId(userId: string): Observable<User[]> {
+  getByUserId(userId: string): Observable<VkUser[]> {
     const params = this.getDefaultParams()
       .set('user_id', userId);
 
     return this.httpJsonpGet(params).pipe(
-      map(this._parseResponse)
+      map(VkApiFriendsService._parseResponse)
     );
   }
 
-  // --- private --- //
-
-  private _parseResponse(res: object): User[] {
-    const friendsItemsList: Array<object>|null = res['items'];
-    if (!friendsItemsList) {
-      throw new Error('Friends items is empty');
-    }
-
-    // Парсит объекты в модели|null и фильтрует(Null) приводя к bool
-    const friendsList = friendsItemsList.map(User.parseResponse).filter(Boolean);
-    if (!friendsList) {
-      throw new Error('Friends is empty');
-    }
-
-    return friendsList;
+  private static _parseResponse(res: object): VkUser[] {
+    return Stp.getIsHas(res, ['items'], Array, true)
+      .map(VkUser.parseItem);
   }
 
 }

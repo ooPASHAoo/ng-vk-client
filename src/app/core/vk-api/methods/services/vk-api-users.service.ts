@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 
 import {VkApiServiceAbstract} from './vk-api.service.abstract';
-import {User} from '../models/user.model';
+import {VkUser} from '../models/vk-user.model';
 
 @Injectable()
 export class VkApiUsersService extends VkApiServiceAbstract {
@@ -14,31 +14,20 @@ export class VkApiUsersService extends VkApiServiceAbstract {
   /** @override */
   protected getDefaultParams(): HttpParams {
     return super.getDefaultParams()
-      .set('fields', 'photo_200_orig,photo_100,bdate,city,country,nickname,counters');
+      .set('fields', 'photo_200_orig,photo_100,bdate,city,country,counters');
   }
 
-
-  // === public methods === //
-
-
-  getById(userId: string): Observable<User> {
+  getById(userId: string): Observable<VkUser> {
     const params = this.getDefaultParams()
       .set('user_id', userId);
 
     return this.httpJsonpGet(params).pipe(
-      map(this._parseResponse)
+      map(VkApiUsersService._parseResponse)
     );
   }
 
-  // --- private --- //
-
-  private _parseResponse(res: Array<object>): User {
-    const user = User.parseResponse(res[0]);
-    if (!user) {
-      throw new Error('User is empty');
-    }
-
-    return user;
+  private static _parseResponse(res: Array<object>): VkUser {
+    return VkUser.parseItem(res[0]);
   }
 
 }

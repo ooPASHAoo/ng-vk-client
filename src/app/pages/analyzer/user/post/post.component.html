@@ -1,0 +1,34 @@
+<div class="card mb-3">
+  <div class="card-header d-flex" (click)="onLog(post)">
+    <img class="rounded-circle" style="width:50px; height: 50px;" src="{{getAuthorPhoto()}}">
+    <div class="d-inline-block ml-4">
+      <h6 class="my-1">{{getAuthorName()}}</h6>
+      <p class="text-muted m-0">{{post.date | pgDate:'WallPost'}}</p>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <p *ngIf="post.text"
+       class="card-text"
+    >{{post.text}}</p>
+
+    <pg-post
+      *ngIf="post.repostHistory"
+      [repostHistory]="post.repostHistory"
+      [relatedUsers]="relatedUsers"
+      [relatedGroups]="relatedGroups"
+    ></pg-post>
+
+    <pg-post-attachment-link
+      *ngIf="hasAttachmentLink()"
+      [attachmentLinks]="getAttachmentLinks()"
+    ></pg-post-attachment-link>
+
+    <pg-post-attachment-photo
+      *ngIf="hasAttachmentPhoto()"
+      [attachmentPhotos]="getAttachmentPhotos()"
+    ></pg-post-attachment-photo>
+
+  </div>
+  <div class="card-footer">Лайков: {{post.likesCount}}</div>
+</div>
