@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {WallPost} from '../../../../../../../../core/vk-api/methods/models/wall-post.model';
-import {MediaPhotoModel} from '../../../../../../../../core/vk-api/methods/models/media-photo.model';
-import {MediaLinkModel} from '../../../../../../../../core/vk-api/methods/models/media-link.model';
+import {User} from '../../../../../../../../core/vk-api/methods/models/user.model';
+import {Group} from '../../../../../../../../core/vk-api/methods/models/group.model';
 
 @Component({
   selector: 'pg-post',
@@ -12,6 +12,10 @@ import {MediaLinkModel} from '../../../../../../../../core/vk-api/methods/models
 export class PostComponent implements OnInit {
 
   @Input() post: WallPost;
+  @Input() relatedUsers: { [userId: string]: User };
+  @Input() relatedGroups: { [groupId: string]: Group };
+
+  @Input() isRepost = false;
 
   constructor() {
   }
@@ -19,16 +23,40 @@ export class PostComponent implements OnInit {
   ngOnInit() {
   }
 
-  asPhoto(v): MediaPhotoModel {
-    return v;
-  }
-
-  asLink(v): MediaLinkModel {
-    return v;
-  }
-
   onLog(obj: any) {
     console.log('- PG:', obj);
+  }
+
+  getAuthorPhoto() {
+    const authorId = this.post.authorId;
+    if (authorId.search('-') !== -1) {
+      const group = this.relatedGroups[authorId.replace('-', '')];
+      return group.photoUrl100;
+    } else {
+      const user = this.relatedUsers[authorId];
+      return user.photoUrl100;
+    }
+  }
+
+  getAuthorName() {
+    const authorId = this.post.authorId;
+    if (authorId.search('-') !== -1) {
+      const group = this.relatedGroups[authorId.replace('-', '')];
+      return group.name;
+    } else {
+      const user = this.relatedUsers[authorId];
+      return user.firstName + ' ' + user.lastName;
+    }
+  }
+
+  hasBodyContent() {
+    if (this.post.attachment) {
+      if (this.post.attachment.type === 'link') {
+        return true;
+      }
+    }
+
+    return this.post.text || this.post.originalPost;
   }
 
 }

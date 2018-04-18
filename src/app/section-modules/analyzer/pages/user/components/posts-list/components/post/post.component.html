@@ -1,53 +1,33 @@
-<div class="card mb-3">
+<div class="card mb-3" [ngClass]="{'post-repost': isRepost}">
   <div class="card-header d-flex" (click)="onLog(post)">
-    <!--<img class="rounded-circle" style="width:50px; height: 50px;" src="{{user?.photoUrl100}}">-->
-    <img class="rounded-circle" style="width:50px; height: 50px;" src="http://placehold.it/100x100/b4fad4">
+    <img class="rounded-circle" style="width:50px; height: 50px;" src="{{getAuthorPhoto()}}">
     <div class="d-inline-block ml-4">
-      <!--<h6 class="my-1" [routerLink]="['/analyzer', user.id]">{{user.firstName}} {{user.lastName}}</h6>-->
-      <h6 class="my-1">Автор Поста</h6>
-      <p class="text-muted m-0">{{post.date?.toLocaleString('ru')}}</p>
+      <h6 class="my-1">{{getAuthorName()}}</h6>
+      <p class="text-muted m-0">{{post.date | pgDate:'WallPost'}}</p>
     </div>
-    <!--Post id: {{post.id}}-->
   </div>
-  <div *ngIf="post.text || post.originalPost || post.attachment?.type === 'link'" class="card-body">
+
+  <div *ngIf="hasBodyContent()" class="card-body">
     <p *ngIf="post.text" class="card-text">{{post.text}}</p>
 
+    <pg-post
+      *ngIf="post.originalPost"
+      [post]="post.originalPost"
+      [isRepost]="true"
+      [relatedUsers]="relatedUsers"
+      [relatedGroups]="relatedGroups"
+    ></pg-post>
 
-    <div *ngIf="post.originalPost" class="card original-post">
-      <div class="card-header d-flex" (click)="onLog(post.originalPost)">
-        <img class="rounded-circle" style="width:50px; height: 50px;" src="http://placehold.it/100x100/b4fad4">
-        <div class="d-inline-block ml-4">
-          <!--<h6 class="my-1" [routerLink]="['/analyzer', user.id]">Пост-Репост</h6>-->
-          <h6 class="my-1">Пост-Репост</h6>
-          <p class="text-muted m-0">{{post.originalPost?.date?.toLocaleString('ru')}}</p>
-        </div>
-      </div>
-      <!---->
-      <div *ngIf="post.originalPost?.text || post.originalPost?.attachment?.type === 'link'" class="card-body">
-        <p *ngIf="post.originalPost?.text" class="card-text">{{post.originalPost?.text}}</p>
-      </div>
-      <!---->
-      <img *ngIf="post.originalPost?.attachment?.type === 'photo'" class="card-img-bottom"
-           src="{{asPhoto(post.originalPost?.attachment)?.url604}}">
-      <!---->
-      <div class="card-footer">Лайков: {{post.originalPost?.likesCount}}</div>
-    </div>
-
-
-    <a *ngIf="post?.attachment?.type === 'link'" class="card media-link p-0" href="{{asLink(post.attachment).url}}">
-      <img class="card-img-top media-link__img" src="{{asLink(post.attachment).photo?.url604}}">
-      <div class="card-body media-link__description">
-        <h5 class="card-title">{{asLink(post.attachment).title}}</h5>
-        <p class="card-text text-muted">{{asLink(post.attachment).caption}}</p>
-      </div>
-    </a>
-
+    <pg-post-attachment-link
+      *ngIf="post.attachment?.type === 'link'"
+      [attachmentLink]="post.attachment"
+    ></pg-post-attachment-link>
   </div>
 
-  <!--<div *ngIf="post?.attachment?.type === 'photo'" class="card-body">-->
-  <img *ngIf="post?.attachment?.type === 'photo'" class="card-img-bottom"
-       src="{{asPhoto(post.attachment)?.url604}}">
-  <!--</div>-->
+  <pg-post-attachment-photo
+    *ngIf="post?.attachment?.type === 'photo'"
+    [attachmentPhoto]="post?.attachment"
+  ></pg-post-attachment-photo>
 
-  <div class="card-footer">Лайков: {{post.likesCount}}</div>
+  <div *ngIf="!isRepost" class="card-footer">Лайков: {{post.likesCount}}</div>
 </div>

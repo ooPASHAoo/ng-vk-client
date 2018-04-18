@@ -12,6 +12,9 @@ import {VkApiModule} from '../../core/vk-api/methods/vk-api.module';
 import {PostComponent} from './pages/user/components/posts-list/components/post/post.component';
 import {UserInfoComponent} from './pages/user/components/user-info/user-info.component';
 import {PostsListComponent} from './pages/user/components/posts-list/posts-list.component';
+import {DateFormatPipe} from './shared/pipes/date-format.pipe';
+import { PostAttachmentLinkComponent } from './pages/user/components/posts-list/components/post/components/post-attachment-link/post-attachment-link.component';
+import { PostAttachmentPhotoComponent } from './pages/user/components/posts-list/components/post/components/post-attachment-photo/post-attachment-photo.component';
 
 @NgModule({
   imports: [
@@ -28,7 +31,10 @@ import {PostsListComponent} from './pages/user/components/posts-list/posts-list.
     UserComponent,
     PostComponent,
     UserInfoComponent,
-    PostsListComponent
+    PostsListComponent,
+    DateFormatPipe,
+    PostAttachmentLinkComponent,
+    PostAttachmentPhotoComponent
   ],
 })
 export class AnalyzerModule {

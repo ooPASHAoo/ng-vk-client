@@ -1,22 +1,3 @@
-.media-link {
-
-  border-color: #7db5fa;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  &:hover &__description {
-    background-color: #f5faff;
-  }
-
-  &__img {
-  }
-  &__description {
-  }
-}
-
-.original-post {
-  border-color: #b4fad4;
+.post-repost {
+    border-color: #b4fad4;
 }
