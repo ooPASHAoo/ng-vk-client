@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {NotFoundComponent} from './not-found/not-found.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './shared/guards/auth-guard.service';
 
@@ -12,18 +12,18 @@ const appRoutes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: './login/login.module#LoginModule'
+    loadChildren: './pages/login/login.module#LoginModule'
   },
   {
     path: 'analyzer',
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: './analyzer/analyzer.module#AnalyzerModule'
+    loadChildren: './pages/analyzer/analyzer.module#AnalyzerModule'
   },
   {
     path: 'about',
-    loadChildren: './about/about.module#AboutModule'
+    loadChildren: './pages/about/about.module#AboutModule'
   },
   {
     path: '**',
