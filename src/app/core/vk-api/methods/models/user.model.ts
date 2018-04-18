@@ -42,7 +42,7 @@ export class User {
     user.lastName = stg.getIsHas(userData, ['last_name'], stg.eType.String);
     user.photoUrl200 = stg.getIsHas(userData, ['photo_200_orig'], stg.eType.String);
     user.photoUrl100 = stg.getIsHas(userData, ['photo_100'], stg.eType.String);
-    if (!user.id || !user.firstName || !user.lastName || (!user.photoUrl200 && !user.photoUrl100)) {
+    if (!user.id || !stg.isStr(user.firstName) || !stg.isStr(user.lastName) || (!user.photoUrl200 && !user.photoUrl100)) {
       return null;
     }
     user.nickname = stg.getIsHas(userData, ['nickname'], stg.eType.String);
