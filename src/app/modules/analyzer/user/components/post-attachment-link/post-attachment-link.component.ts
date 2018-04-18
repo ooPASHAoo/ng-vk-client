@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MediaLinkModel} from '../../../../core/vk-api/methods/models/media-link.model';
+import {MediaLinkModel} from '../../../../../core/vk-api/methods/models/media-link.model';
 
 @Component({
   selector: 'pg-post-attachment-link',

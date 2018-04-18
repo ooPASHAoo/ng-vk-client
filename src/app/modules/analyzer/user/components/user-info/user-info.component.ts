@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {VkApiUsersService} from '../../../../core/vk-api/methods/services/vk-api-users.service';
-import {User} from '../../../../core/vk-api/methods/models/user.model';
-import {ApiError} from '../../../../core/vk-api/methods/errors/api-error';
-import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
+import {VkApiUsersService} from '../../../../../core/vk-api/methods/services/vk-api-users.service';
+import {User} from '../../../../../core/vk-api/methods/models/user.model';
+import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
+import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
 
 @Component({
   selector: 'pg-user-info',

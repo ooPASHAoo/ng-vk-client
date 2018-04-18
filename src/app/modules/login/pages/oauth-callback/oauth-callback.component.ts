@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {OAUTH_EVENT} from '../../../core/vk-api/oauth/vk-oauth.const';
+import {OAUTH_EVENT} from '../../../../core/vk-api/oauth/vk-oauth.const';
 
 @Component({
   template: ''

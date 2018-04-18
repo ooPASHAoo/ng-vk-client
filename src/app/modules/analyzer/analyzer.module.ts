@@ -8,7 +8,7 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {FriendsComponent} from './friends/friends.component';
 import {FeedComponent} from './feed/feed.component';
 import {UserComponent} from './user/user.component';
-import {VkApiModule} from '../core/vk-api/methods/vk-api.module';
+import {VkApiModule} from '../../core/vk-api/methods/vk-api.module';
 import {PostComponent} from './user/components/post/post.component';
 import {UserInfoComponent} from './user/components/user-info/user-info.component';
 import {PostsListComponent} from './user/components/posts-list/posts-list.component';
