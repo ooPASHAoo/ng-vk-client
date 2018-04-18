@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {WallPost} from '../../../../../../../../core/vk-api/methods/models/wall-post.model';
-import {User} from '../../../../../../../../core/vk-api/methods/models/user.model';
-import {Group} from '../../../../../../../../core/vk-api/methods/models/group.model';
+import {WallPost} from '../../../../core/vk-api/methods/models/wall-post.model';
+import {User} from '../../../../core/vk-api/methods/models/user.model';
+import {Group} from '../../../../core/vk-api/methods/models/group.model';
 
 @Component({
   selector: 'pg-post',

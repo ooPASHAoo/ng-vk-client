@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MediaPhotoModel} from '../../../../../../../../../../core/vk-api/methods/models/media-photo.model';
+import {MediaPhotoModel} from '../../../../core/vk-api/methods/models/media-photo.model';
 
 @Component({
   selector: 'pg-post-attachment-photo',

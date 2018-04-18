@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {VkApiWallService} from '../../../../../../core/vk-api/methods/services/vk-api-wall.service';
-import {WallPost} from '../../../../../../core/vk-api/methods/models/wall-post.model';
-import {ApiError} from '../../../../../../core/vk-api/methods/errors/api-error';
-import {AuthVkError} from '../../../../../../core/vk-api/methods/errors/token-error';
-import {WallPostsList} from '../../../../../../core/vk-api/methods/models/wall-posts-list.model';
+import {VkApiWallService} from '../../../../core/vk-api/methods/services/vk-api-wall.service';
+import {WallPost} from '../../../../core/vk-api/methods/models/wall-post.model';
+import {ApiError} from '../../../../core/vk-api/methods/errors/api-error';
+import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
+import {WallPostsList} from '../../../../core/vk-api/methods/models/wall-posts-list.model';
 
 @Component({
   selector: 'pg-posts-list',

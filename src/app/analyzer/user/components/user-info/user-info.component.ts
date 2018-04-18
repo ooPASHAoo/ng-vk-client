@@ -1,34 +1,29 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {VkApiFriendsService} from '../../../../core/vk-api/methods/services/vk-api-friends.service';
+import {VkApiUsersService} from '../../../../core/vk-api/methods/services/vk-api-users.service';
 import {User} from '../../../../core/vk-api/methods/models/user.model';
 import {ApiError} from '../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
 
 @Component({
-  selector: 'pg-friends',
-  templateUrl: './friends.component.html',
-  styleUrls: ['./friends.component.scss']
+  selector: 'pg-user-info',
+  templateUrl: './user-info.component.html',
+  styleUrls: ['./user-info.component.scss']
 })
-export class FriendsComponent implements OnInit {
+export class UserInfoComponent implements OnInit {
 
   @Input() userId: string;
 
-  friendsList: User[];
+  user: User;
   isLoaded = false;
   hasLoadError = false;
 
   constructor(private _router: Router,
-              private _vkApiFriends: VkApiFriendsService) {
+              private _vkApiUsers: VkApiUsersService) {
   }
 
   ngOnInit() {
-    if (!this.userId) {
-      // Если токена не будет, то вернется AuthVkError
-      this.userId = this._vkApiFriends.getCurrentUserId();
-    }
-
     this._refresh();
   }
 
@@ -41,22 +36,22 @@ export class FriendsComponent implements OnInit {
   // --- private --- //
 
   private _refresh() {
-    this._loadFriendsList(this.userId);
+    this._loadUser(this.userId);
   }
 
-  private _loadFriendsList(userId: string) {
+  private _loadUser(userId: string) {
     this.isLoaded = false;
     this.hasLoadError = false;
 
-    this._vkApiFriends.getByUserId(userId)
+    this._vkApiUsers.getById(userId)
       .subscribe(
         this._responseSuccessHandler.bind(this),
         this._responseFailureHandler.bind(this)
       );
   }
 
-  private _responseSuccessHandler(res: User[]) {
-    this.friendsList = res;
+  private _responseSuccessHandler(res: User) {
+    this.user = res;
 
     this.isLoaded = true;
   }
@@ -69,7 +64,7 @@ export class FriendsComponent implements OnInit {
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
     } else {
-      alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
+      alert('Ошибка при загрузке пользователя. Попробуйте еще раз.');
     }
 
     this.isLoaded = true;
