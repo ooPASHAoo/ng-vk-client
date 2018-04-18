@@ -6,6 +6,7 @@ import {VkPost} from '../../../../core/vk-api/methods/models/vk-post.model';
 import {VkMediaPhoto} from '../../../../core/vk-api/methods/models/vk-media-photo.model';
 import {VkMedia} from '../../../../core/vk-api/methods/models/vk-media.model.abstract';
 import {VkMediaLink} from '../../../../core/vk-api/methods/models/vk-media-link.model';
+import {text} from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'pg-post',
@@ -25,11 +26,22 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Кривоватый способ отображения репостов любой вложенности
     if (!this.post && this.repostHistory) {
       this.isRepost = true;
-      // console.log('- PG:', this.repostHistory);
       this.post = this.repostHistory[0];
+      const subRepostHistory = this.repostHistory.slice(1);
+      if (subRepostHistory.length) {
+        this.post.repostHistory = subRepostHistory;
+      }
     }
+  }
+
+  isPhotoOnly(): boolean {
+    return this.hasAttachmentPhoto() &&
+      !this.hasAttachmentLink() &&
+      !this.post.text &&
+      !this.post.repostHistory;
   }
 
   // --- author --- //
@@ -105,5 +117,4 @@ export class PostComponent implements OnInit {
   onLog(obj: any) {
     console.log('- PG:', obj);
   }
-
 }

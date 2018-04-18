@@ -1,3 +1,15 @@
 .post-repost {
-    border-color: #b4fad4;
+  border-color: #DEE6EE;
+  border-left-width: 4px;
+
+  margin-left: -10px;
+  margin-right: -10px;
+
+  .post__header {
+    background-color: #fafcff;
+  }
+}
+
+.post-body-photo {
+  padding: 0;
 }
