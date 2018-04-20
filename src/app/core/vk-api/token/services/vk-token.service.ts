@@ -13,7 +13,7 @@ export class VkTokenService {
     return !!this.getActualLocalToken();
   }
 
-  getCurrentUserId(): string {
+  getCurrentUserId(): string|null {
     const token = this._getLocalToken();
     return token ? token.userId : null;
   }

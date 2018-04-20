@@ -1,0 +1,51 @@
+<div *ngIf="!isLoaded">
+  <!-- TODO: Loading component -->
+  <p>Загрузка...</p>
+</div>
+
+<div *ngIf="isLoaded && !hasLoadError">
+
+  <div class="card flex-row user">
+    <img class="user__avatar" src="{{user.photoUrl200}}">
+    <div class="card-body">
+      <h2 class="h4">{{user.firstName}} {{user.lastName}}</h2>
+      <hr>
+      <p><span class="text-muted">Id: </span>{{user.id}}</p>
+      <p><span class="text-muted">Nickname: </span>{{user.nickname ? user.nickname : 'нет'}}</p>
+      <p><span class="text-muted">Друзей: </span>{{user.countFriends ? user.countFriends : 'неизвесно'}}</p>
+    </div>
+  </div>
+
+  <div class="container bg-light px-1 py-2 mb-4">
+    <button class="btn btn-outline-secondary btn-block mb-2" type="button"
+            [routerLink]="['/', user.id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      Страница пользователя
+    </button>
+    <div class="btn-group d-flex">
+      <button type="button" class="btn btn-sm btn-outline-secondary w-100"
+              [routerLink]="['/', user.id, 'fellow', 'mate']" routerLinkActive="active">
+        Круг общения
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-secondary w-100"
+              [routerLink]="['/', user.id, 'fellow', 'school']" routerLinkActive="active">
+        Одноклассники
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-secondary w-100"
+              [routerLink]="['/', user.id, 'fellow', 'work']" routerLinkActive="active">
+        Коллеги
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-secondary w-100"
+              [routerLink]="['/', user.id, 'fellow', 'kind']" routerLinkActive="active">
+        Семья
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isLoaded && hasLoadError">
+  <div class="btn btn-info" (click)="onRefresh()">Попробовать еще раз.</div>
+</div>
+
+
+<!-- TODO: exact:false && exact:true 'Страница пользователя' -->

@@ -18,10 +18,6 @@ export abstract class VkApiServiceAbstract {
               private _vkTokenService: VkTokenService) {
   }
 
-  public getCurrentUserId(): string|null {
-    return this._vkTokenService.getCurrentUserId();
-  }
-
   protected getDefaultParams(): HttpParams {
     return new HttpParams()
       .set('v', '5.74');

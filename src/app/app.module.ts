@@ -6,6 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {VkTokenModule} from './core/vk-api/token/vk-token.module';
 import {AuthGuard} from './shared/guards/auth-guard.service';
+import {VkApiModule} from './core/vk-api/methods/vk-api.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import {AuthGuard} from './shared/guards/auth-guard.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    VkTokenModule
+    VkApiModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

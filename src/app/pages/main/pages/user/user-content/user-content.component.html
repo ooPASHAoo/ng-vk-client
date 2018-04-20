@@ -1,0 +1,9 @@
+
+
+<div class="nav nav-tabs nav-fill mb-4">
+  <a class="nav-item nav-link" [routerLink]="['/', userId]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Стена</a>
+  <a class="nav-item nav-link" [routerLink]="['/', userId, 'friends']" routerLinkActive="active">Друзья</a>
+  <a class="nav-item nav-link" [routerLink]="['/', userId, 'subscribes']" routerLinkActive="active">Подписчики</a>
+</div>
+
+<router-outlet></router-outlet>

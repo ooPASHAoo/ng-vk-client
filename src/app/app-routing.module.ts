@@ -7,23 +7,19 @@ import {AuthGuard} from './shared/guards/auth-guard.service';
 
 const appRoutes: Routes = [
   {
-    path: '',
-    component: AppComponent
-  },
-  {
     path: 'login',
     loadChildren: './pages/login/login.module#LoginModule'
   },
   {
-    path: 'analyzer',
+    path: 'about',
+    loadChildren: './pages/about/about.module#AboutModule'
+  },
+  {
+    path: '',
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    loadChildren: './pages/analyzer/analyzer.module#AnalyzerModule'
-  },
-  {
-    path: 'about',
-    loadChildren: './pages/about/about.module#AboutModule'
+    loadChildren: './pages/main/main.module#MainModule'
   },
   {
     path: '**',
