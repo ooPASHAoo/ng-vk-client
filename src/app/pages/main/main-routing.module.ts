@@ -11,7 +11,7 @@ import {MateComponent} from './pages/user/fellow/mate/mate.component';
 import {SchoolComponent} from './pages/user/fellow/school/school.component';
 import {WorkComponent} from './pages/user/fellow/work/work.component';
 import {KindComponent} from './pages/user/fellow/kind/kind.component';
-import {SubscribesComponent} from './pages/user/user-content/subscribes/subscribes.component';
+import {GroupsComponent} from './pages/user/user-content/groups/groups.component';
 
 
 // === page routes === //
@@ -24,7 +24,7 @@ import {SubscribesComponent} from './pages/user/user-content/subscribes/subscrib
 const userRootSubRoutes: Routes = [
   {path: '', component: WallComponent},
   {path: 'friends', component: FriendsComponent},
-  {path: 'subscribes', component: SubscribesComponent}
+  {path: 'groups', component: GroupsComponent}
 ];
 
 /**
