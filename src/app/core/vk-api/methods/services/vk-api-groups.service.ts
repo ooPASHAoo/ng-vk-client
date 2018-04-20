@@ -28,7 +28,6 @@ export class VkApiGroupsService extends VkApiServiceAbstract {
   }
 
   private static _parseResponse(res: object): VkGroup[] {
-    console.log('- PG:', res);
     return Stp.getIsHas(res, ['items'], Array, true)
       .map(VkGroup.parseItem);
   }
