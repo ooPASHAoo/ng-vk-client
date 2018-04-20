@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {VkGroup} from '../../../../../../core/vk-api/methods/models/vk-group.model';
-import {VkApiGroupsService} from '../../../../../../core/vk-api/methods/services/vk-api-groups.service';
-import {ApiError} from '../../../../../../core/vk-api/methods/errors/api-error';
-import {AuthVkError} from '../../../../../../core/vk-api/methods/errors/token-error';
-import {StpError} from '../../../../../../shared/supports/safe-type-parser';
+import {VkGroup} from '../../../../../core/vk-api/methods/models/vk-group.model';
+import {VkApiGroupsService} from '../../../../../core/vk-api/methods/services/vk-api-groups.service';
+import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
+import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
+import {StpError} from '../../../../../shared/supports/safe-type-parser';
 
 @Component({
   selector: 'pg-groups',

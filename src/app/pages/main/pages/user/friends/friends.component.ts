@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {VkApiFriendsService} from '../../../../../../core/vk-api/methods/services/vk-api-friends.service';
-import {ApiError} from '../../../../../../core/vk-api/methods/errors/api-error';
-import {AuthVkError} from '../../../../../../core/vk-api/methods/errors/token-error';
-import {VkUser} from '../../../../../../core/vk-api/methods/models/vk-user.model';
-import {StpError} from '../../../../../../shared/supports/safe-type-parser';
-import {VkTokenService} from '../../../../../../core/vk-api/token/services/vk-token.service';
+import {VkApiFriendsService} from '../../../../../core/vk-api/methods/services/vk-api-friends.service';
+import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
+import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
+import {VkUser} from '../../../../../core/vk-api/methods/models/vk-user.model';
+import {StpError} from '../../../../../shared/supports/safe-type-parser';
+import {VkTokenService} from '../../../../../core/vk-api/token/services/vk-token.service';
 
 @Component({
   selector: 'pg-friends',

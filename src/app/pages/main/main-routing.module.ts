@@ -3,15 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {MainComponent} from './main.component';
 import {UserComponent} from './pages/user/user.component';
-import {UserContentComponent} from './pages/user/user-content/user-content.component';
-import {WallComponent} from './pages/user/user-content/wall/wall.component';
-import {FriendsComponent} from './pages/user/user-content/friends/friends.component';
-import {FellowComponent} from './pages/user/fellow/fellow.component';
-import {MateComponent} from './pages/user/fellow/mate/mate.component';
-import {SchoolComponent} from './pages/user/fellow/school/school.component';
-import {WorkComponent} from './pages/user/fellow/work/work.component';
-import {KindComponent} from './pages/user/fellow/kind/kind.component';
-import {GroupsComponent} from './pages/user/user-content/groups/groups.component';
+import {WallComponent} from './pages/user/wall/wall.component';
+import {FriendsComponent} from './pages/user/friends/friends.component';
+import {GroupsComponent} from './pages/user/groups/groups.component';
 
 
 // === page routes === //
@@ -27,36 +21,14 @@ const userRootSubRoutes: Routes = [
   {path: 'groups', component: GroupsComponent}
 ];
 
-/**
- * Components: App/Main/User/Fellow/...
- * Full path: /user/:id/fellow/...
- */
-const userFellowSubRoutes: Routes = [
-  {path: 'mate', component: MateComponent},
-  {path: 'school', component: SchoolComponent},
-  {path: 'work', component: WorkComponent},
-  {path: 'kind', component: KindComponent}
-];
-
-
 // --- support routes --- //
-
-
-/**
- * Components: App/Main/User/...
- * Full path: /user/:id/...
- */
-const userContentSubRoutes: Routes = [
-  {path: '', component: UserContentComponent, children: userRootSubRoutes},
-  {path: 'fellow', component: FellowComponent, children: userFellowSubRoutes}
-];
 
 /**
  * Components: App/Main/...
  * Full path: /...
  */
 const userSubRoutes: Routes = [
-  {path: ':id', component: UserComponent, children: userContentSubRoutes}
+  {path: ':id', component: UserComponent, children: userRootSubRoutes}
 ];
 
 /**
