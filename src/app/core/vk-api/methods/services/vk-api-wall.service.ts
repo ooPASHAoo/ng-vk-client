@@ -15,14 +15,15 @@ export class VkApiWallService extends VkApiServiceAbstract {
   protected getDefaultParams(): HttpParams {
     return super.getDefaultParams()
       .set('order', 'hints')
-      .set('count', '100')
       .set('extended', '1')
       .set('fields', 'photo_100');
   }
 
-  getByOwnerId(ownerId: string): Observable<VkPostsList> {
+  getPosts(ownerId: string, offset: number, count: number): Observable<VkPostsList> {
     const params = this.getDefaultParams()
-      .set('owner_id', ownerId);
+      .set('owner_id', ownerId)
+      .set('count', count.toString())
+      .set('offset', offset.toString());
 
     return this.httpJsonpGet(params).pipe(
       map(VkApiWallService._parseResponse)

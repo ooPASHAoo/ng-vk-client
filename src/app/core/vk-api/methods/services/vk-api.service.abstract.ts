@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {map} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 
 import {VkTokenService} from '../../token/services/vk-token.service';
 import {AuthVkError} from '../errors/token-error';
@@ -40,6 +40,7 @@ export abstract class VkApiServiceAbstract {
     const url = this._requestUrl(params);
 
     return this._httpClient.jsonp(url, 'callback').pipe(
+      // delay(2000),
       map(this._parseBaseResponseData)
     );
   }

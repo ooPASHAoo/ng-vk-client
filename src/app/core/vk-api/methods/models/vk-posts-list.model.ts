@@ -6,6 +6,7 @@ import {Stp} from '../../../../shared/supports/safe-type-parser';
 export class VkPostsList {
 
   posts: VkPost[];
+  maxCount: number;
   relatedUsers: { [userId: string]: VkUser }|null;
   relatedGroups: { [groupId: string]: VkGroup }|null;
 
@@ -16,6 +17,7 @@ export class VkPostsList {
     const postsList = new VkPostsList();
 
     postsList.posts = stp.get(['items'], Array, true).map(VkPost.parseItem);
+    postsList.maxCount = stp.get(['count'], Number, true);
 
     const groupItemsList: Array<object>|null = stp.get(['groups'], Array);
     if (groupItemsList) {
@@ -36,6 +38,13 @@ export class VkPostsList {
     }
 
     return postsList;
+  }
+
+  static assign(target: VkPostsList, source: VkPostsList) {
+    target.maxCount = source.maxCount;
+    target.posts.push(...source.posts);
+    Object.assign(target.relatedUsers, source.relatedUsers);
+    Object.assign(target.relatedGroups, source.relatedGroups);
   }
 
 }
