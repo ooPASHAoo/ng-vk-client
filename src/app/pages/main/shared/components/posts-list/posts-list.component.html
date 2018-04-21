@@ -5,10 +5,7 @@
            [relatedGroups]="postsList.relatedGroups">
   </pg-post>
 </div>
-<div *ngIf="isLoading">
-  <!-- TODO: Loading component -->
-  <p>Загрузка записей...</p>
-</div>
+<pg-spinner *ngIf="isLoading"></pg-spinner>
 
 <div *ngIf="!isLoading && hasLoadError">
   <div class="btn btn-info" (click)="onRefresh()">Попробовать еще раз.</div>

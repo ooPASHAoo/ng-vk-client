@@ -15,11 +15,12 @@ import {PostAttachmentLinkComponent} from './shared/components/post/post-attachm
 import {PostAttachmentPhotoComponent} from './shared/components/post/post-attachment-photo/post-attachment-photo.component';
 import {FriendsComponent} from './pages/user/friends/friends.component';
 import { UserContentMenuComponent } from './shared/components/user-content-menu/user-content-menu.component';
+import {SpinnerComponent} from '../../shared/components/spinner/spinner.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
   ],
   declarations: [
     MainComponent,
@@ -38,6 +39,8 @@ import { UserContentMenuComponent } from './shared/components/user-content-menu/
     PostAttachmentLinkComponent,
     PostAttachmentPhotoComponent,
     UserContentMenuComponent,
+
+    SpinnerComponent
   ],
 })
 export class MainModule {

@@ -1,7 +1,4 @@
-<div *ngIf="!isLoaded">
-  <!-- TODO: Loading component -->
-  <p>Загрузка...</p>
-</div>
+<pg-spinner *ngIf="!isLoaded"></pg-spinner>
 <div *ngIf="isLoaded && !hasLoadError">
 
   <div *ngFor="let friend of friendsList"
