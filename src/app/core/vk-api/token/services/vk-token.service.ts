@@ -45,7 +45,7 @@ export class VkTokenService {
 
     const nowTime = (new Date()).getTime();
     const expiredTime = token.expires.getTime();
-    const timeLeft = nowTime - expiredTime;
+    const timeLeft = expiredTime - nowTime;
 
     return (timeLeft <= 0);
   }
