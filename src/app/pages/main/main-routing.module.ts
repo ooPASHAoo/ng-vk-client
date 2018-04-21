@@ -5,7 +5,6 @@ import {MainComponent} from './main.component';
 import {UserComponent} from './pages/user/user.component';
 import {WallComponent} from './pages/user/wall/wall.component';
 import {FriendsComponent} from './pages/user/friends/friends.component';
-import {GroupsComponent} from './pages/user/groups/groups.component';
 
 
 // === page routes === //
@@ -18,7 +17,6 @@ import {GroupsComponent} from './pages/user/groups/groups.component';
 const userRootSubRoutes: Routes = [
   {path: '', component: WallComponent},
   {path: 'friends', component: FriendsComponent},
-  {path: 'groups', component: GroupsComponent}
 ];
 
 // --- support routes --- //
