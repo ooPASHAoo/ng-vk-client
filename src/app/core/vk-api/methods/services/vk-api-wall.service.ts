@@ -11,6 +11,8 @@ export class VkApiWallService extends VkApiServiceAbstract {
 
   protected METHOD_URL = 'wall.get';
 
+  readonly MAX_COUNT = 100;
+
   /** @override */
   protected getDefaultParams(): HttpParams {
     return super.getDefaultParams()
@@ -23,7 +25,7 @@ export class VkApiWallService extends VkApiServiceAbstract {
     const params = this.getDefaultParams()
       .set('owner_id', ownerId)
       .set('count', count.toString())
-      .set('offset', offset.toString());
+      .set('offset', Math.min(offset, this.MAX_COUNT).toString());
 
     return this.httpJsonpGet(params).pipe(
       map(VkApiWallService._parseResponse)
