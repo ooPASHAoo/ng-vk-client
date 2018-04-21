@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {delay, map} from 'rxjs/operators';
+import {delayWhen, map, retryWhen} from 'rxjs/operators';
+import {timer} from 'rxjs/observable/timer';
 
 import {VkTokenService} from '../../token/services/vk-token.service';
 import {AuthVkError} from '../errors/token-error';
-import {ApiError} from '../errors/api-error';
-import {Stp} from '../../../../shared/supports/safe-type-parser';
+import {ApiError, eApiErrCode} from '../errors/api-error';
 
 @Injectable()
 export abstract class VkApiServiceAbstract {
@@ -34,10 +34,27 @@ export abstract class VkApiServiceAbstract {
 
     const params = httpParams.set('access_token', token.token);
     const url = this._requestUrl(params);
+    const callbackParamName = 'callback'; // This param key. Value auto-generate
 
-    return this._httpClient.jsonp(url, 'callback').pipe(
-      // delay(2000),
-      map(this._parseBaseResponseData)
+    console.log('- Request:', this.METHOD_URL, '\n', httpParams.delete('v').toString());
+
+    return this._httpClient.jsonp(url, callbackParamName).pipe(
+      map(this._parseBaseResponseData),
+      retryWhen(this._errorBaseRetryHandler)
+    );
+  }
+
+  private _errorBaseRetryHandler(errors: Observable<any>): Observable<any> {
+    return errors.pipe(
+      delayWhen(err => {
+        if (err instanceof ApiError) {
+          if (err.code === eApiErrCode.MANY_PER_SECOND) {
+            console.warn('VkApi: Слишком много запросов в секунду, повтор через 1 секунду.');
+            return timer(1000);
+          }
+        }
+        throw err;
+      })
     );
   }
 

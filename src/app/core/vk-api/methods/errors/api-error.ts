@@ -1,3 +1,8 @@
+export enum eApiErrCode {
+  UNKNOWN = 1,
+  MANY_PER_SECOND = 6,
+}
+
 export class ApiError extends Error {
 
   code: number;
@@ -11,3 +16,5 @@ export class ApiError extends Error {
     Object.setPrototypeOf(this, ApiError.prototype);
   }
 }
+
+// коды ошибок - https://vk.com/dev/errors
