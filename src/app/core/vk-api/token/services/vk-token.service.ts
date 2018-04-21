@@ -18,28 +18,36 @@ export class VkTokenService {
     return token ? token.userId : null;
   }
 
-  getActualLocalToken() {
+  getActualLocalToken(): VkTokenModel|null {
     const token = this._getLocalToken();
-    return (!this._isExpired(token)) ? token : null;
+    if (!token || this._isExpired(token)) {
+      return null;
+    }
+    return token;
   }
 
   removeLocalToken() {
     this._tokenStorage.removeToken();
   }
 
-  private _getLocalToken() {
-    // TODO: Different error. TokenError->expired
+  private _getLocalToken(): VkTokenModel|null {
     try {
       return this._tokenStorage.getToken();
     } catch (err) {
       return null;
-    } finally {
     }
   }
 
   private _isExpired(token: VkTokenModel): boolean {
-    const now = new Date();
-    const timeLeft = token.expires.getTime() - now.getTime();
-    return timeLeft <= 0;
+    if (!token || !token.expires || !(token.expires instanceof Date)) {
+      return true;
+    }
+
+    const nowTime = (new Date()).getTime();
+    const expiredTime = token.expires.getTime();
+    const timeLeft = nowTime - expiredTime;
+
+    return (timeLeft <= 0);
   }
+
 }
