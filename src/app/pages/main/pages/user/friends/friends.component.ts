@@ -77,7 +77,7 @@ export class FriendsComponent implements OnInit {
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
     } else {
-      alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
+      // alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
     }
 
     this.isLoaded = true;

@@ -1,11 +1,11 @@
 import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {VkApiUsersService} from '../../../../../core/vk-api/methods/services/vk-api-users.service';
-import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
-import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
-import {VkUser} from '../../../../../core/vk-api/methods/models/vk-user.model';
-import {StpError} from '../../../../../shared/supports/safe-type-parser';
+import {VkApiUsersService} from '../../../../../../core/vk-api/methods/services/vk-api-users.service';
+import {ApiError} from '../../../../../../core/vk-api/methods/errors/api-error';
+import {AuthVkError} from '../../../../../../core/vk-api/methods/errors/token-error';
+import {VkUser} from '../../../../../../core/vk-api/methods/models/vk-user.model';
+import {StpError} from '../../../../../../shared/supports/safe-type-parser';
 
 @Component({
   selector: 'pg-user-info',
