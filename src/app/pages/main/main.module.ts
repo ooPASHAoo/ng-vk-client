@@ -14,6 +14,7 @@ import {DateFormatPipe} from './shared/pipes/date-format.pipe';
 import {PostAttachmentLinkComponent} from './shared/components/post/post-attachment-link/post-attachment-link.component';
 import {PostAttachmentPhotoComponent} from './shared/components/post/post-attachment-photo/post-attachment-photo.component';
 import {FriendsComponent} from './pages/user/friends/friends.component';
+import { UserContentMenuComponent } from './shared/components/user-content-menu/user-content-menu.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import {FriendsComponent} from './pages/user/friends/friends.component';
     DateFormatPipe,
     PostAttachmentLinkComponent,
     PostAttachmentPhotoComponent,
+    UserContentMenuComponent,
   ],
 })
 export class MainModule {

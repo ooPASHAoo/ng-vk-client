@@ -1,8 +1,4 @@
 <pg-user-info [userId]="userId"></pg-user-info>
-
-<div class="nav nav-tabs nav-fill mb-4">
-  <a class="nav-item nav-link" [routerLink]="['/', userId]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Стена</a>
-  <a class="nav-item nav-link" [routerLink]="['/', userId, 'friends']" routerLinkActive="active">Друзья</a>
-</div>
+<pg-user-content-menu [userId]="userId"></pg-user-content-menu>
 
 <router-outlet></router-outlet>
