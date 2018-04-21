@@ -48,7 +48,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this._tokenParser.parseHash(resultHash)
       .then((token: VkTokenModel) => {
         this._tokenStorage.saveToken(token);
-        this._router.navigate(['/main']);
+        this._router.navigate(['/']);
       })
       .catch((err) => {
         this._showError(err, 'Произошла ошибка, попробуйте еще.');
