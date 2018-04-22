@@ -27,6 +27,10 @@ export class SidebarComponent implements OnInit {
   }
 
   goToTop() {
+    if (!this.isShowUpBtn) {
+      return;
+    }
+
     const duration = 500;
     const fps = 60;
     //
