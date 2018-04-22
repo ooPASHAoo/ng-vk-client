@@ -15,9 +15,7 @@ import {FriendsListService} from '../../../../../core/services/friends-list.serv
 export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
   get usersList(): VkUser[]|null {
-    const usersList = this.friendsService.friends;
-    console.log('- PG:', usersList);
-    return usersList;
+    return this.friendsService.friends;
   }
 
   isLoading = false;
