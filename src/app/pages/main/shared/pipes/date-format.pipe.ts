@@ -5,7 +5,8 @@ import {Moment} from 'moment';
 
 enum eDateFormat {
   Default = '',
-  WallPost = 'WallPost'
+  WallPost = 'WallPost',
+  Age = 'Age'
 }
 
 // 1 минуту назад ... 59 минут назад
@@ -36,9 +37,16 @@ export class DateFormatPipe implements PipeTransform {
         return this._formatDefault(mDate);
       case eDateFormat.WallPost:
         return this._formatWallPost(mDate);
+      case eDateFormat.Age:
+        return this._formatAge(mDate);
       default:
         return mDate.format('HH:mm DD.MM.YYYY');
     }
+  }
+
+  private _formatAge(date: Moment): string {
+    const years = moment().diff(date, 'years');
+    return (years > 0) ? years.toString() : '?';
   }
 
   private _formatWallPost(date: Moment): string {

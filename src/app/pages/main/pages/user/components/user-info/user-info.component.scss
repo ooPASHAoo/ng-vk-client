@@ -1,8 +1,97 @@
 .user {
-  overflow: hidden;
+  min-width: 420px;
+  padding: 0;
 
-  &__avatar {
+  // - top line - //
+
+  .user__main {
+    display: flex;
+  }
+
+  .user__avatar {
     width: 200px;
     height: 200px;
   }
+
+  .user__info {
+    flex-grow: 1;
+  }
+
+  // - bot line - //
+
+  .user__counters {
+
+  }
 }
+
+.avatar {
+
+  &__img {
+    width: 200px;
+    overflow: hidden;
+  }
+}
+
+.info {
+  padding: 10px;
+
+  &__header {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  &__separate {
+    margin: 10px -10px 12px -10px;
+  }
+}
+
+.props {
+  display: flex;
+
+  &__names {
+    padding-right: 4px;
+  }
+
+  &__values {
+    margin-right: auto;
+  }
+
+  &__item-name {
+    color: #919191;
+    margin-bottom: 6px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item-value {
+    margin-bottom: 6px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.counters {
+  display: flex;
+  justify-content: space-around;
+  border-top: black;
+  padding: 10px;
+
+  &__item {
+    flex-basis: 90px;
+    text-align: center;
+  }
+
+  &__item-value {
+    margin: 0;
+    font-size: 22px;
+    font-weight: lighter;
+  }
+
+  &__item-name {
+    margin: 0;
+    color: #919191;
+  }
+}
+

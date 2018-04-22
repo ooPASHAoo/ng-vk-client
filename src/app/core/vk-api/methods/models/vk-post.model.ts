@@ -51,7 +51,7 @@ export class VkPost {
         } else if (mediaType === VkMediaPhoto.typeName) {
           attachmentsList.push(VkMediaPhoto.parseItem(attachmentItem[mediaType]));
         } else {
-          console.log('Необработан медиа контент типа:', mediaType);
+          // console.log('Необработан медиа контент типа:', mediaType);
         }
       });
 

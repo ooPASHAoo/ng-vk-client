@@ -8,6 +8,7 @@ import {VkTokenModule} from './core/vk-api/token/vk-token.module';
 import {AuthGuard} from './shared/guards/auth-guard.service';
 import {VkApiModule} from './core/vk-api/methods/vk-api.module';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { ErrorRetryComponent } from './shared/components/error-retry/error-retry.component';
 
 @NgModule({
   declarations: [

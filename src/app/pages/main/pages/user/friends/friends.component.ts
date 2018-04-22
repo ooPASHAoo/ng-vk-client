@@ -1,86 +1,78 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-import {VkApiFriendsService} from '../../../../../core/vk-api/methods/services/vk-api-friends.service';
 import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
+import {FriendsService} from '../../../../../core/services/friends.service';
+import {LoaderServiceDelegate} from '../../../../../core/services/abstracts/loader.service.abstract';
 import {VkUser} from '../../../../../core/vk-api/methods/models/vk-user.model';
-import {StpError} from '../../../../../shared/supports/safe-type-parser';
-import {VkTokenService} from '../../../../../core/vk-api/token/services/vk-token.service';
 
 @Component({
   selector: 'pg-friends',
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss']
 })
-export class FriendsComponent implements OnInit {
+export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
-    userId: string;
-  // @Input() userId: string;
+  get usersList(): VkUser[]|null {
+    return this.friendsService.friends;
+  }
 
-  friendsList: VkUser[];
-  isLoaded = false;
+  isLoading = false;
   hasLoadError = false;
 
-  constructor(private _activatedRoute: ActivatedRoute,
-              private _vkTokenService: VkTokenService,
-              private _router: Router,
-              private _vkApiFriends: VkApiFriendsService) {
+  constructor(private _router: Router,
+              public friendsService: FriendsService) {
   }
 
   ngOnInit() {
-    this._activatedRoute.parent.paramMap
-      .subscribe((paramMap) => {
-        this.userId = paramMap.get('id');
-        this._refresh();
-      });
+    this.friendsService.loaderDelegate = this;
+    if (!this.friendsService.friends) {
+      this.friendsService.refresh();
+    }
   }
+
+  ngOnDestroy() {
+    this.friendsService.loaderDelegate = null;
+  }
+
 
   // --- actions --- //
 
+
   onRefresh() {
-    this._refresh();
+    this.friendsService.refresh();
   }
 
-  // --- private --- //
 
-  private _refresh() {
-    this._loadFriendsList(this.userId);
+  // --- LoaderServiceDelegate --- //
+
+  lsdChangeOwnerId(ownerId: string): void {
+    this.friendsService.load();
   }
 
-  private _loadFriendsList(userId: string) {
-    this.isLoaded = false;
+  lsdLoadInterceptor(ownerId: string): boolean {
+    this.isLoading = true;
+    return true;
+  }
+
+  lsdSuccessHandler(newData: number): void {
     this.hasLoadError = false;
-
-    this._vkApiFriends.getByUserId(userId)
-      .subscribe(
-        this._responseSuccessHandler.bind(this),
-        this._responseFailureHandler.bind(this)
-      );
   }
 
-  private _responseSuccessHandler(res: VkUser[]) {
-    this.friendsList = res;
-
-    this.isLoaded = true;
-  }
-
-  private _responseFailureHandler(err: ApiError|AuthVkError|Error) {
-    console.warn(`- PG: ${err.name} - ${err.message}`);
-    if (err instanceof StpError) {
-      console.dir(err.parseObject);
-    }
-
+  lsdFailureHandler(err: ApiError|AuthVkError|Error): void {
     this.hasLoadError = true;
 
     if (err instanceof AuthVkError) {
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
     } else {
-      // alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
+      alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
     }
+  }
 
-    this.isLoaded = true;
+  lsdFinallyHandler(): void {
+    this.isLoading = false;
   }
 
 }

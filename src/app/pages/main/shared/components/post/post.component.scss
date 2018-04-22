@@ -13,3 +13,20 @@
 .post-body-photo {
   padding: 0;
 }
+
+.post {
+
+  &__footer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__footer-row {
+    flex-basis: 80px;
+
+    &--right {
+      text-align: right;
+      flex-grow: 1;
+    }
+  }
+}

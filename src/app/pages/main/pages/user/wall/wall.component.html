@@ -1,1 +1,9 @@
-<pg-posts-list [ownerId]="ownerId"></pg-posts-list>
+<pg-posts-list *ngIf="postsList"
+               [postsList]="postsList">
+</pg-posts-list>
+
+<pg-spinner *ngIf="isLoading"></pg-spinner>
+
+<pg-error-retry *ngIf="!isLoading && hasLoadError"
+                (retry)="onRefresh()">
+</pg-error-retry>

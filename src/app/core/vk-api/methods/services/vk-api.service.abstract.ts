@@ -36,8 +36,6 @@ export abstract class VkApiServiceAbstract {
     const url = this._requestUrl(params);
     const callbackParamName = 'callback'; // This param key. Value auto-generate
 
-    console.log('- Request:', this.METHOD_URL, '\n', httpParams.delete('v').toString());
-
     return this._httpClient.jsonp(url, callbackParamName).pipe(
       map(this._parseBaseResponseData),
       retryWhen(this._errorBaseRetryHandler)

@@ -1,12 +1,5 @@
-<div *ngIf="postsList?.posts">
-  <pg-post *ngFor="let post of postsList.posts"
-           [post]="post"
-           [relatedUsers]="postsList.relatedUsers"
-           [relatedGroups]="postsList.relatedGroups">
-  </pg-post>
-</div>
-<pg-spinner *ngIf="isLoading"></pg-spinner>
-
-<div *ngIf="!isLoading && hasLoadError">
-  <div class="btn btn-info" (click)="onRefresh()">Попробовать еще раз.</div>
-</div>
+<pg-post *ngFor="let post of postsList.posts"
+         [post]="post"
+         [relatedUsers]="postsList.relatedUsers"
+         [relatedGroups]="postsList.relatedGroups">
+</pg-post>

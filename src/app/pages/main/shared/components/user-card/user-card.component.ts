@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+
+import {VkUser} from '../../../../../core/vk-api/methods/models/vk-user.model';
 
 @Component({
   selector: 'pg-user-card',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent implements OnInit {
+
+  @Input() user: VkUser|null;
 
   constructor() { }
 

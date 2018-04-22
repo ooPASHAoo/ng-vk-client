@@ -16,7 +16,7 @@ export class VkApiFriendsService extends VkApiServiceAbstract {
   protected getDefaultParams(): HttpParams {
     return super.getDefaultParams()
       .set('order', 'hints')
-      .set('fields', 'photo_100');
+      .set('fields', 'photo_100,country,city');
   }
 
   getByUserId(userId: string): Observable<VkUser[]> {

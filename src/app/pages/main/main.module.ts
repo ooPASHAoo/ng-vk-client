@@ -16,6 +16,9 @@ import {PostAttachmentPhotoComponent} from './shared/components/post/post-attach
 import {FriendsComponent} from './pages/user/friends/friends.component';
 import {UserContentMenuComponent} from './pages/user/components/user-content-menu/user-content-menu.component';
 import {SpinnerComponent} from '../../shared/components/spinner/spinner.component';
+import {UsersListComponent} from './shared/components/users-list/users-list.component';
+import {UserCardComponent} from './shared/components/user-card/user-card.component';
+import {ErrorRetryComponent} from '../../shared/components/error-retry/error-retry.component';
 
 @NgModule({
   imports: [
@@ -35,12 +38,16 @@ import {SpinnerComponent} from '../../shared/components/spinner/spinner.componen
     PostsListComponent,
     PostComponent,
 
+    UsersListComponent,
+    UserCardComponent,
+
     DateFormatPipe,
     PostAttachmentLinkComponent,
     PostAttachmentPhotoComponent,
     UserContentMenuComponent,
 
-    SpinnerComponent
+    SpinnerComponent,
+    ErrorRetryComponent
   ],
 })
 export class MainModule {

@@ -30,5 +30,18 @@
     ></pg-post-attachment-photo>
 
   </div>
-  <div *ngIf="!isRepost" class="card-footer">Лайков: {{post.likesCount}}</div>
+  <div *ngIf="!isRepost" class="card-footer post__footer">
+    <div class="post__footer-row">
+      <span class="oi oi-heart pr-2"></span>{{post.likesCount}}
+    </div>
+    <div class="post__footer-row">
+      <span class="oi oi-comment-square pr-2"></span>{{post.commentsCount}}
+    </div>
+    <div class="post__footer-row">
+      <span class="oi oi-bullhorn pr-2"></span>{{post.repostsCount}}
+    </div>
+    <div *ngIf="post.viewsCount" class="post__footer-row post__footer-row--right">
+      {{post.viewsCount}}<span class="oi oi-eye pl-2"></span>
+    </div>
+  </div>
 </div>

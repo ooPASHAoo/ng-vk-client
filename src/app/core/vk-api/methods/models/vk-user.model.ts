@@ -10,12 +10,16 @@ export class VkUser {
   photoUrl200: string|null;
   photoUrl100: string|null;
 
+  domain: string|null;
   birthDay: Date|null;
   country: string|null;
   city: string|null;
 
   countFriends: number|null;
   countMutualFriends: number|null;
+  countFollowers: number|null;
+  countGroups: number|null;
+  countPhotos: number|null;
 
 
   /** @throws StpError */
@@ -27,12 +31,16 @@ export class VkUser {
     user.firstName = stp.get(['first_name'], String, true);
     user.lastName = stp.get(['last_name'], String, true);
     //
-    user.photoUrl200 = stp.get(['photo_200_orig'], String);
+    user.photoUrl200 = stp.get(['photo_200'], String);
     user.photoUrl100 = stp.get(['photo_100'], String);
+    user.domain = stp.get(['domain'], String);
     user.country = stp.get(['country', 'title'], String);
     user.city = stp.get(['city', 'title'], String);
     user.countFriends = stp.get(['counters', 'friends'], Number);
     user.countMutualFriends = stp.get(['counters', 'mutual_friends'], Number);
+    user.countFollowers = stp.get(['counters', 'followers'], Number);
+    user.countGroups = stp.get(['counters', 'groups'], Number);
+    user.countPhotos = stp.get(['counters', 'photos'], Number);
     const birthMoment = moment(stp.get(['bdate'], String), ['DD.MM.YYYY', 'D.MM.YYYY', 'DD.M.YYYY', 'D.M.YYYY']);
     user.birthDay = birthMoment.isValid() ? birthMoment.toDate() : null;
 

@@ -20,7 +20,8 @@
       "prefix": "pg",
       "styles": [
         "styles.scss",
-        "assets/bootstrap.css"
+        "assets/bootstrap.css",
+        "assets/open-iconic-bootstrap.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

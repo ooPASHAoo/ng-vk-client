@@ -1,0 +1,19 @@
+.user {
+
+  &:hover &__body {
+    background-color: #F7F7F7;
+    transition: background-color 0.2s;
+  }
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+
+  outline: none;
+  cursor: pointer;
+  &__img {
+    width: 100px;
+  }
+}

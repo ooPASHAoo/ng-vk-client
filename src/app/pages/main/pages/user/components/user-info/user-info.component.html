@@ -1,23 +1,46 @@
-<pg-spinner *ngIf="!isLoaded"></pg-spinner>
+<div class="user border mb-3">
+  <div class="user__main">
+    <div class="user__avatar avatar">
+      <img class="avatar__img" src="{{user.photoUrl200}}">
+    </div>
+    <div class="user__info info">
 
-<div *ngIf="isLoaded && !hasLoadError">
-
-  <div class="card flex-row user mb-3">
-    <img class="user__avatar" src="{{user.photoUrl200}}">
-    <div class="card-body">
-      <h2 class="h4">{{user.firstName}} {{user.lastName}}</h2>
-      <hr>
-      <p><span class="text-muted">Id: </span>{{user.id}}</p>
-      <p><span class="text-muted">Nickname: </span>{{user.nickname ? user.nickname : 'нет'}}</p>
-      <p><span class="text-muted">Друзей: </span>{{user.countFriends ? user.countFriends : 'неизвесно'}}</p>
+      <h2 class="info__header">{{user.firstName}} {{user.lastName}}</h2>
+      <hr class="info__separate">
+      <div class="info__props props">
+        <div class="props__names">
+          <p class="props__item-name">User id:</p>
+          <p class="props__item-name">Ссылка:</p>
+          <p class="props__item-name">Страна:</p>
+          <p class="props__item-name">Город:</p>
+          <p class="props__item-name">Возраст:</p>
+        </div>
+        <div class="props__values">
+          <p class="props__item-value">{{user.id}}</p>
+          <p class="props__item-value">{{user.domain}}</p>
+          <p class="props__item-value">{{user.country ? user.country : '?'}}</p>
+          <p class="props__item-value">{{user.city ? user.city : '?'}}</p>
+          <p class="props__item-value">{{user.birthDay ? (user.birthDay | pgDate:'Age') : '?'}}</p>
+        </div>
+      </div>
     </div>
   </div>
-
+  <div class="user__counters counters border-top">
+    <div class="counters__item">
+      <p class="counters__item-name">друзей</p>
+      <p class="counters__item-value">{{user.countFriends ? user.countFriends : '?'}}</p>
+    </div>
+    <div class="counters__item">
+      <p class="counters__item-name">подписчиков</p>
+      <p class="counters__item-value">{{user.countFollowers ? user.countFollowers : '?'}}</p>
+    </div>
+    <div class="counters__item">
+      <p class="counters__item-name">групп</p>
+      <p class="counters__item-value">{{user.countGroups ? user.countGroups : '?'}}</p>
+    </div>
+    <div class="counters__item">
+      <p class="counters__item-name">фото</p>
+      <p class="counters__item-value">{{user.countPhotos ? user.countPhotos : '?'}}</p>
+    </div>
+  </div>
 </div>
-
-<div *ngIf="isLoaded && hasLoadError">
-  <div class="btn btn-info" (click)="onRefresh()">Попробовать еще раз.</div>
-</div>
-
-
-<!-- TODO: exact:false && exact:true 'Страница пользователя' -->
