@@ -2,6 +2,11 @@
                [postsList]="postsList">
 </pg-posts-list>
 
+<div *ngIf="!postsList && !isLoading && !hasLoadError"
+     class="container text-center">
+  <p class="lead text-muted">У пользователя нет постов.</p>
+</div>
+
 <pg-spinner *ngIf="isLoading"></pg-spinner>
 
 <pg-error-retry *ngIf="!isLoading && hasLoadError"
