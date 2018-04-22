@@ -6,7 +6,6 @@ import {VkPost} from '../../../../../core/vk-api/methods/models/vk-post.model';
 import {VkMediaPhoto} from '../../../../../core/vk-api/methods/models/vk-media-photo.model';
 import {VkMedia} from '../../../../../core/vk-api/methods/models/vk-media.model.abstract';
 import {VkMediaLink} from '../../../../../core/vk-api/methods/models/vk-media-link.model';
-import {text} from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'pg-post',
@@ -46,25 +45,28 @@ export class PostComponent implements OnInit {
 
   // --- author --- //
 
-  getAuthorPhoto(): string {
+  get authorLink(): string[]|null {
     const author = this._getAuthorById(this.post.authorId);
-    if (!author) {
-      console.warn('Ошибка при чтении url фотографии автора поста!');
-      return 'http://placehold.it/100x100/3a99d9';
+    if (author instanceof VkUser) {
+      return (author.id !== this.post.ownerId) ? ['/', author.id] : null;
     }
-    return author.photoUrl100;
+    return null;
   }
 
-  getAuthorName(): string {
+  get authorName(): string|null {
     const author = this._getAuthorById(this.post.authorId);
+    if (author instanceof VkUser) {
+      return `${author.firstName} ${author.lastName}`;
+    }
     if (author instanceof VkGroup) {
       return author.name;
-    } else if (author instanceof VkUser) {
-      return author.firstName + ' ' + author.lastName;
-    } else {
-      console.warn('Ошибка при чтении имени автора поста!');
-      return 'Неизвестно';
     }
+    return null;
+  }
+
+  get authorPhoto(): string {
+    const author = this._getAuthorById(this.post.authorId);
+    return author ? author.photoUrl100 : null;
   }
 
   // --- attachments --- //
@@ -112,9 +114,4 @@ export class PostComponent implements OnInit {
     return attachmentItems.length ? attachmentItems : null;
   }
 
-  // --- temporary --- //
-
-  onLog(obj: any) {
-    console.log('- PG:', obj);
-  }
 }

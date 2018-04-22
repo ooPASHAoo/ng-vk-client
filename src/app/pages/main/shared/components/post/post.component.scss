@@ -16,6 +16,28 @@
 
 .post {
 
+  &__author-img {
+    width: 50px;
+    height: 50px;
+    outline: none;
+    &--link {
+      cursor: pointer;
+      &:hover {
+        box-shadow: 0 0 1px 1px #818181;
+      }
+    }
+  }
+
+  &__author-name {
+    outline: none;
+    &--link {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   &__footer {
     display: flex;
     flex-wrap: wrap;
