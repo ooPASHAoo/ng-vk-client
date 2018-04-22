@@ -18,10 +18,10 @@ export abstract class LoaderListServiceAbstract<T> extends LoaderServiceAbstract
   //   }
   // }
 
-  // /** Max count = 100 */
-  // setCount(count: number) {
-  //   this._count = Math.min(count, this._vkWallService.MAX_COUNT);
-  // }
+  /** Danger method */
+  protected _setCount(count: number) {
+    this._count = count;
+  }
 
 
   // --- abstracts --- //
@@ -52,7 +52,11 @@ export abstract class LoaderListServiceAbstract<T> extends LoaderServiceAbstract
   /** @override */
   protected _responseSuccessHandler(res: T) {
     this._offset += this._dataLength(res);
-    this._isDataEnd = this._dataIsEnd(res);
+    if (this._dataLength(res) < this._count) {
+      this._isDataEnd = true;
+    } else {
+      this._isDataEnd = this._dataIsEnd(res);
+    }
     super._responseSuccessHandler(res);
   }
 

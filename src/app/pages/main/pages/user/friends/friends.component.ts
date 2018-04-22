@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
-import {FriendsService} from '../../../../../core/services/friends.service';
 import {LoaderServiceDelegate} from '../../../../../core/services/abstracts/loader.service.abstract';
 import {VkUser} from '../../../../../core/vk-api/methods/models/vk-user.model';
+import {FriendsListService} from '../../../../../core/services/friends-list.service';
 
 @Component({
   selector: 'pg-friends',
@@ -21,8 +21,10 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
   isLoading = false;
   hasLoadError = false;
 
+  private readonly _loadScrollBottom = 3000;
+
   constructor(private _router: Router,
-              public friendsService: FriendsService) {
+              public friendsService: FriendsListService) {
   }
 
   ngOnInit() {
@@ -40,12 +42,23 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
   // --- actions --- //
 
 
+  @HostListener('window:scroll')
+  onScroll() {
+    const scrollHeight = document.body.offsetHeight;
+    const scrollBottom = window.innerHeight + window.scrollY;
+    const scrollLeft = scrollHeight - scrollBottom;
+    if (scrollLeft < this._loadScrollBottom) {
+      this.friendsService.load();
+    }
+  }
+
   onRefresh() {
     this.friendsService.refresh();
   }
 
 
   // --- LoaderServiceDelegate --- //
+
 
   lsdChangeOwnerId(ownerId: string): void {
     this.friendsService.load();

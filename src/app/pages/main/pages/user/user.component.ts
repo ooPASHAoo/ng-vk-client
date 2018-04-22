@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {VkTokenService} from '../../../../core/vk-api/token/services/vk-token.service';
 import {PostsListService} from '../../../../core/services/posts-list.service';
-import {FriendsService} from '../../../../core/services/friends.service';
 import {UserService} from '../../../../core/services/user.service';
 import {LoaderServiceDelegate} from '../../../../core/services/abstracts/loader.service.abstract';
 import {VkUser} from '../../../../core/vk-api/methods/models/vk-user.model';
 import {ApiError} from '../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
+import {FriendsListService} from '../../../../core/services/friends-list.service';
 
 @Component({
   selector: 'pg-user',
@@ -15,7 +14,7 @@ import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
   styleUrls: ['./user.component.scss'],
   providers: [
     PostsListService,
-    FriendsService,
+    FriendsListService,
     UserService
   ]
 })
@@ -34,7 +33,7 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
               private _router: Router,
               private _userService: UserService,
               private _postsService: PostsListService,
-              private _friendsService: FriendsService) {
+              private _friendsService: FriendsListService) {
   }
 
   ngOnInit() {

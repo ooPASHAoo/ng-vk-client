@@ -4,12 +4,14 @@ import {Observable} from 'rxjs/Observable';
 import {LoaderServiceAbstract} from './abstracts/loader.service.abstract';
 import {VkUser} from '../vk-api/methods/models/vk-user.model';
 import {VkApiFriendsService} from '../vk-api/methods/services/vk-api-friends.service';
+import {LoaderListServiceAbstract} from './abstracts/loader-list.service.abstract';
 
 @Injectable()
-export class FriendsService extends LoaderServiceAbstract<VkUser[]> {
+export class FriendsListService extends LoaderListServiceAbstract<VkUser[]> {
 
   constructor(private _vkFriendsService: VkApiFriendsService) {
     super();
+    this._setCount(30);
   }
 
   /** Read only */
@@ -19,8 +21,12 @@ export class FriendsService extends LoaderServiceAbstract<VkUser[]> {
 
   // --- LoaderServiceAbstract --- //
 
+  protected _dataIsEnd(newData: VkUser[]): boolean {
+    return false;
+  }
+
   protected _dataLoader(): Observable<VkUser[]> {
-    return this._vkFriendsService.getByUserId(this._ownerId);
+    return this._vkFriendsService.getFriends(this._ownerId, this._offset, this._count);
   }
 
   protected _dataLength(data: VkUser[]): number {
@@ -28,13 +34,11 @@ export class FriendsService extends LoaderServiceAbstract<VkUser[]> {
   }
 
   protected _dataConcat(newData: VkUser[]): void {
-    this._data = newData;
+    if (this._data) {
+      this._data.push(...newData);
+    } else {
+      this._data = newData;
+    }
   }
 
 }
-
-/**
- * У VK-API максимальное количество возвращаемых друзей 5000.
- * Но это учебный проект и для отличия от posts-list.service
- * я сделал типа они возвращаются сразу все.
- */

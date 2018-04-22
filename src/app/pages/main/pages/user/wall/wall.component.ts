@@ -74,7 +74,7 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
   }
 
   lsdFailureHandler(err: ApiError|AuthVkError|Error): void {
-    this.hasLoadError = false;
+    this.hasLoadError = true;
 
     if (err instanceof AuthVkError) {
       alert(err.userDescription);
