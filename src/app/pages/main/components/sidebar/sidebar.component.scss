@@ -15,3 +15,30 @@
 .nav-link:not(.active):hover {
   color: gray;
 }
+
+.up-btn {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  transition: opacity 0.5s;
+  opacity: 0;
+
+  &--show {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__icon {
+    display: inline-block;
+    margin-top: 2px;
+    font-size:28px;
+  }
+
+}

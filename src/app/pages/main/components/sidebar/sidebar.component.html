@@ -23,5 +23,11 @@
   <!--<a class="nav-link" routerLinkActive="active" routerLink="./birth-date">- Дата рождения</a>-->
 </div>
 
+<button type="button"
+        class="btn btn-outline-secondary rounded-circle up-btn"
+        [ngClass]="isShowUpBtn ? 'up-btn--show' : 'disabled'"
+        (click)="goToTop()">
+  <span class="up-btn__icon">&#8963;</span>
+</button>
 
 <!-- TODO:!!!: routerLinkActive="active" для родителя // не работает =(-->
