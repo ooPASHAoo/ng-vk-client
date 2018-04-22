@@ -8,12 +8,14 @@ import {VkCurrentUserService} from '../../../../core/vk-api/methods/services/vk-
 })
 export class SidebarComponent implements OnInit {
 
+  private _maxTopOffset = 200;
+
   userId: string;
   isShowUpBtn = false;
 
   @HostListener('window:scroll')
   onScroll() {
-    this.isShowUpBtn = (window.scrollY > 100);
+    this.isShowUpBtn = (window.scrollY > this._maxTopOffset);
   }
 
   constructor(private _currentUser: VkCurrentUserService) {
