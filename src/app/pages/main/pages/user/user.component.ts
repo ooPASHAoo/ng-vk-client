@@ -39,20 +39,24 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
   }
 
   ngOnInit() {
-    this._userService.loaderDelegate = this;
-
     this._activatedRoute.paramMap
       .subscribe((paramMap) => {
-        const userId = paramMap.get('id');
-        if (userId === 'im') {
-          this.userId = this._currentUser.getId();
-        } else {
-          this.userId = userId;
-        }
-        this._userService.resetWithNewOwnerId(this.userId);
-        this._postsService.resetWithNewOwnerId(this.userId);
-        this._friendsService.resetWithNewOwnerId(this.userId);
+        this.changeUserId(paramMap.get('id'));
       });
+  }
+
+  changeUserId(userId: string) {
+    if (this._currentUser.getId() === userId) {
+      this._router.navigate(['/im']);
+      return;
+    }
+    this.userId = userId;
+
+    const userNumId = (userId === 'im') ? this._currentUser.getId() : userId;
+    this._userService.loaderDelegate = this;
+    this._userService.resetWithNewOwnerId(userNumId);
+    this._postsService.resetWithNewOwnerId(userNumId);
+    this._friendsService.resetWithNewOwnerId(userNumId);
   }
 
 
