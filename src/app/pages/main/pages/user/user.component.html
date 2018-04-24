@@ -1,17 +1,12 @@
 <div *ngIf="!isLoading && !hasLoadError">
-  <pg-user-info *ngIf="user"
-                [user]="user">
-  </pg-user-info>
+  <pg-user-info [user]="user"></pg-user-info>
   <pg-user-content-menu [userId]="userId"></pg-user-content-menu>
-
   <router-outlet></router-outlet>
-
 </div>
-
-<pg-spinner *ngIf="isLoading"></pg-spinner>
 
 <pg-error-retry *ngIf="!isLoading && hasLoadError"
                 (retry)="onRefresh()">
 </pg-error-retry>
+<pg-spinner *ngIf="isLoading"></pg-spinner>
 
 

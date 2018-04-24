@@ -1,4 +1,4 @@
-<div class="card mb-3 post" [ngClass]="{'post-repost': isRepost}">
+<div class="card mb-3 post" [ngClass]="{'post-repost': isRepost}" [@fadeInOut]>
   <div class="card-header d-flex post__header">
     <img class="rounded-circle post__author-img"
          [ngClass]="{'post__author-img--link' : authorLink}"

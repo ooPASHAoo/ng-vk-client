@@ -6,11 +6,13 @@ import {VkPost} from '../../../../../core/vk-api/methods/models/vk-post.model';
 import {VkMediaPhoto} from '../../../../../core/vk-api/methods/models/vk-media-photo.model';
 import {VkMedia} from '../../../../../core/vk-api/methods/models/vk-media.model.abstract';
 import {VkMediaLink} from '../../../../../core/vk-api/methods/models/vk-media-link.model';
+import {fadeInOutAnimation} from '../../../../../shared/animations/fade-in-out.animation';
 
 @Component({
   selector: 'pg-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  styleUrls: ['./post.component.scss'],
+  animations: [fadeInOutAnimation]
 })
 export class PostComponent implements OnInit {
 
