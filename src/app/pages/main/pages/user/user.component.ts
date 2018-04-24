@@ -7,6 +7,7 @@ import {VkUser} from '../../../../core/vk-api/methods/models/vk-user.model';
 import {ApiError} from '../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
 import {FriendsListService} from '../../../../core/services/friends-list.service';
+import {VkCurrentUserService} from '../../../../core/vk-api/methods/services/vk-current-user.service';
 
 @Component({
   selector: 'pg-user',
@@ -31,6 +32,7 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _router: Router,
+              private _currentUser: VkCurrentUserService,
               private _userService: UserService,
               private _postsService: PostsListService,
               private _friendsService: FriendsListService) {
@@ -41,7 +43,12 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
 
     this._activatedRoute.paramMap
       .subscribe((paramMap) => {
-        this.userId = paramMap.get('id');
+        const userId = paramMap.get('id');
+        if (userId === 'im') {
+          this.userId = this._currentUser.getId();
+        } else {
+          this.userId = userId;
+        }
         this._userService.resetWithNewOwnerId(this.userId);
         this._postsService.resetWithNewOwnerId(this.userId);
         this._friendsService.resetWithNewOwnerId(this.userId);

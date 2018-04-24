@@ -26,6 +26,7 @@ const userRootSubRoutes: Routes = [
  * Full path: /...
  */
 const userSubRoutes: Routes = [
+  {path: '', redirectTo: 'im', pathMatch: 'full'},
   {path: ':id', component: UserComponent, children: userRootSubRoutes}
 ];
 
