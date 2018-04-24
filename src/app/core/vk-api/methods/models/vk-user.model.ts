@@ -7,6 +7,9 @@ export class VkUser {
   firstName: string;
   lastName: string;
 
+  photoUrl400orig: string|null;
+  photoUrl400: string|null;
+  photoUrl200orig: string|null;
   photoUrl200: string|null;
   photoUrl100: string|null;
 
@@ -31,6 +34,9 @@ export class VkUser {
     user.firstName = stp.get(['first_name'], String, true);
     user.lastName = stp.get(['last_name'], String, true);
     //
+    user.photoUrl400orig = stp.get(['photo_400_orig'], String);
+    user.photoUrl400 = stp.get(['photo_400'], String);
+    user.photoUrl200orig = stp.get(['photo_200_orig'], String);
     user.photoUrl200 = stp.get(['photo_200'], String);
     user.photoUrl100 = stp.get(['photo_100'], String);
     user.domain = stp.get(['domain'], String);

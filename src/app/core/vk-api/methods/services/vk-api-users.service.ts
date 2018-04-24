@@ -14,7 +14,7 @@ export class VkApiUsersService extends VkApiServiceAbstract {
   /** @override */
   protected getDefaultParams(): HttpParams {
     return super.getDefaultParams()
-      .set('fields', 'photo_200,photo_100,bdate,city,country,counters,domain');
+      .set('fields', 'photo_400_orig,photo_400_orig,photo_200,photo_200_orig,photo_100,bdate,city,country,counters,domain');
   }
 
   getById(userId: string): Observable<VkUser> {
