@@ -1,7 +1,13 @@
 <div class="user border mb-3">
   <div class="user__main">
     <div class="user__avatar avatar">
-      <img class="avatar__img" src="{{user.photoUrl200}}">
+      <img class="avatar__img"
+           src="{{
+           user.photoUrl400 ? user.photoUrl400 :
+           user.photoUrl400orig ? user.photoUrl400orig :
+           user.photoUrl200 ? user.photoUrl200 :
+           user.photoUrl200orig
+           }}">
     </div>
     <div class="user__info info">
 

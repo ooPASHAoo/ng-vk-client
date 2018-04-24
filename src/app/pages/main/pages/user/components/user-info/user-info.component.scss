@@ -11,6 +11,9 @@
   .user__avatar {
     width: 200px;
     height: 200px;
+    overflow: hidden;
+    background-color: #F7F7F7;
+    flex-shrink: 0;
   }
 
   .user__info {
@@ -26,14 +29,17 @@
 
 .avatar {
 
+
   &__img {
-    width: 200px;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
 .info {
   padding: 10px;
+  overflow: scroll;
 
   &__header {
     margin: 0;
