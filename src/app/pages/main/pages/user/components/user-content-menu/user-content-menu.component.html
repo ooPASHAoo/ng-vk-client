@@ -1,4 +1,14 @@
 <div class="nav nav-tabs nav-fill mb-4" [@fadeInOut]>
-  <a class="nav-item nav-link" [routerLink]="['/', userId]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Стена</a>
-  <a class="nav-item nav-link" [routerLink]="['/', userId, 'friends']" routerLinkActive="active">Друзья</a>
+  <a class="nav-item nav-link"
+     routerLink="/{{userId}}"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{exact: true,  __change_detection_hack__: userId}">
+    Стена
+  </a>
+  <a class="nav-item nav-link"
+     routerLink="/{{userId}}/friends"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{exact: false,  __change_detection_hack__: userId}">
+    Друзья
+  </a>
 </div>
