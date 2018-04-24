@@ -52,7 +52,7 @@ export abstract class LoaderServiceAbstract<T> {
   }
 
   cancelLoading() {
-    if (this._isLoading()) {
+    if (this.isLoading()) {
       this._dataLoader$.unsubscribe();
     }
   }
@@ -61,12 +61,18 @@ export abstract class LoaderServiceAbstract<T> {
     this._data = null;
   }
 
+  isLoading(): boolean {
+    if (this._dataLoader$) {
+      return !this._dataLoader$.closed;
+    }
+  }
+
   load(): boolean {
     if (!this._ownerId) {
       console.warn('LoaderService: need ownerId');
       return false;
     }
-    if (this._isLoading()) {
+    if (this.isLoading()) {
       return false;
     }
 
@@ -98,13 +104,6 @@ export abstract class LoaderServiceAbstract<T> {
 
 
   // --- protected --- //
-
-
-  protected _isLoading(): boolean {
-    if (this._dataLoader$) {
-      return !this._dataLoader$.closed;
-    }
-  }
 
   protected _responseSuccessHandler(res: T) {
     this._dataConcat(res);

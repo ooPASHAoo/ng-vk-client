@@ -79,10 +79,14 @@
 }
 
 .counters {
-  display: flex;
-  justify-content: space-around;
   border-top: black;
-  padding: 10px;
+  min-height: 75px;;
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+  }
 
   &__item {
     flex-basis: 90px;

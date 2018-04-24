@@ -18,7 +18,11 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
     return this.postsService.postsList;
   }
 
-  isLoading = false;
+  // isLoading = false;
+  get isLoading(): boolean {
+    return this.postsService.isLoading();
+  }
+
   hasLoadError = false;
 
   private readonly _loadScrollBottom = 3000;
@@ -65,7 +69,7 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {
-    this.isLoading = true;
+    // this.isLoading = true;
     return true;
   }
 
@@ -85,7 +89,7 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
   }
 
   lsdFinallyHandler(): void {
-    this.isLoading = false;
+    // this.isLoading = false;
   }
 
 }

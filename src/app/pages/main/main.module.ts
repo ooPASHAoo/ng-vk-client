@@ -19,6 +19,7 @@ import {SpinnerComponent} from '../../shared/components/spinner/spinner.componen
 import {UsersListComponent} from './shared/components/users-list/users-list.component';
 import {UserCardComponent} from './shared/components/user-card/user-card.component';
 import {ErrorRetryComponent} from '../../shared/components/error-retry/error-retry.component';
+import {LoaderRectComponent} from '../../shared/components/loader-rect/loader-rect.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import {ErrorRetryComponent} from '../../shared/components/error-retry/error-ret
     UserContentMenuComponent,
 
     SpinnerComponent,
-    ErrorRetryComponent
+    ErrorRetryComponent,
+    LoaderRectComponent
   ],
 })
 export class MainModule {

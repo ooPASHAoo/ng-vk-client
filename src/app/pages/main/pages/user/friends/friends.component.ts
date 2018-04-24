@@ -18,7 +18,10 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
     return this.friendsService.friends;
   }
 
-  isLoading = false;
+  // isLoading = false;
+  get isLoading(): boolean {
+    return this.friendsService.isLoading();
+  }
   hasLoadError = false;
 
   private readonly _loadScrollBottom = 3000;
@@ -30,7 +33,8 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
   ngOnInit() {
     this.friendsService.loaderDelegate = this;
     if (!this.friendsService.friends) {
-      this.friendsService.refresh();
+      // this.friendsService.refresh();
+      this.friendsService.load();
     }
   }
 
@@ -65,7 +69,7 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {
-    this.isLoading = true;
+    // this.isLoading = true;
     return true;
   }
 
@@ -85,7 +89,7 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
   }
 
   lsdFinallyHandler(): void {
-    this.isLoading = false;
+    // this.isLoading = false;
   }
 
 }

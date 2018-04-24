@@ -1,16 +1,15 @@
 <div class="user border mb-3" [@fadeInOut]>
   <div class="user__main">
     <div class="user__avatar avatar">
-      <img class="avatar__img"
-           src="{{
-           user.photoUrl400 ? user.photoUrl400 :
-           user.photoUrl400orig ? user.photoUrl400orig :
-           user.photoUrl200 ? user.photoUrl200 :
-           user.photoUrl200orig
-           }}">
+      <img *ngIf="user" class="avatar__img"
+           src="{{user.photoUrl400 ? user.photoUrl400 :
+                  user.photoUrl400orig ? user.photoUrl400orig :
+                  user.photoUrl200 ? user.photoUrl200 :
+                  user.photoUrl200orig}}"
+      >
+      <pg-loader-rect *ngIf="!user"></pg-loader-rect>
     </div>
-    <div class="user__info info">
-
+    <div *ngIf="user" class="user__info info">
       <h2 class="info__header">{{user.firstName}} {{user.lastName}}</h2>
       <hr class="info__separate">
       <div class="info__props props">
@@ -31,22 +30,25 @@
       </div>
     </div>
   </div>
+
   <div class="user__counters counters border-top">
-    <div class="counters__item">
-      <p class="counters__item-name">друзей</p>
-      <p class="counters__item-value">{{user.countFriends ? user.countFriends : '?'}}</p>
-    </div>
-    <div class="counters__item">
-      <p class="counters__item-name">подписчиков</p>
-      <p class="counters__item-value">{{user.countFollowers ? user.countFollowers : '?'}}</p>
-    </div>
-    <div class="counters__item">
-      <p class="counters__item-name">групп</p>
-      <p class="counters__item-value">{{user.countGroups ? user.countGroups : '?'}}</p>
-    </div>
-    <div class="counters__item">
-      <p class="counters__item-name">фото</p>
-      <p class="counters__item-value">{{user.countPhotos ? user.countPhotos : '?'}}</p>
+    <div *ngIf="user" class="counters__container">
+      <div class="counters__item">
+        <p class="counters__item-name">друзей</p>
+        <p class="counters__item-value">{{user.countFriends ? user.countFriends : '?'}}</p>
+      </div>
+      <div class="counters__item">
+        <p class="counters__item-name">подписчиков</p>
+        <p class="counters__item-value">{{user.countFollowers ? user.countFollowers : '?'}}</p>
+      </div>
+      <div class="counters__item">
+        <p class="counters__item-name">групп</p>
+        <p class="counters__item-value">{{user.countGroups ? user.countGroups : '?'}}</p>
+      </div>
+      <div class="counters__item">
+        <p class="counters__item-name">фото</p>
+        <p class="counters__item-value">{{user.countPhotos ? user.countPhotos : '?'}}</p>
+      </div>
     </div>
   </div>
 </div>
