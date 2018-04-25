@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 
 import {ApiError, eApiErrCode} from '../../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
-import {PostsListService} from '../../../../../core/services/posts-list.service';
-import {LoaderServiceDelegate} from '../../../../../core/services/abstracts/loader.service.abstract';
+import {PostsListService} from '../../../shared/services/posts-list.service';
+import {LoaderServiceDelegate} from '../../../shared/services/abstracts/loader.service.abstract';
 import {VkPostsList} from '../../../../../core/vk-api/methods/models/vk-posts-list.model';
 
 

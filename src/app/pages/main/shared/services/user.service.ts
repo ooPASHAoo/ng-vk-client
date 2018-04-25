@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {LoaderServiceAbstract} from './abstracts/loader.service.abstract';
-import {VkUser} from '../vk-api/methods/models/vk-user.model';
-import {VkApiUsersService} from '../vk-api/methods/services/vk-api-users.service';
+import {VkUser} from '../../../../core/vk-api/methods/models/vk-user.model';
+import {VkApiUsersService} from '../../../../core/vk-api/methods/services/vk-api-users.service';
 
 
 @Injectable()

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {VkPostsList} from '../vk-api/methods/models/vk-posts-list.model';
-import {VkApiWallService} from '../vk-api/methods/services/vk-api-wall.service';
+import {VkPostsList} from '../../../../core/vk-api/methods/models/vk-posts-list.model';
+import {VkApiWallService} from '../../../../core/vk-api/methods/services/vk-api-wall.service';
 import {LoaderListServiceAbstract} from './abstracts/loader-list.service.abstract';
 
 

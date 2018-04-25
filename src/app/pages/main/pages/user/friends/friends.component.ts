@@ -3,9 +3,9 @@ import {Router} from '@angular/router';
 
 import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
-import {LoaderServiceDelegate} from '../../../../../core/services/abstracts/loader.service.abstract';
+import {LoaderServiceDelegate} from '../../../shared/services/abstracts/loader.service.abstract';
 import {VkUser} from '../../../../../core/vk-api/methods/models/vk-user.model';
-import {FriendsListService} from '../../../../../core/services/friends-list.service';
+import {FriendsListService} from '../../../shared/services/friends-list.service';
 
 
 @Component({

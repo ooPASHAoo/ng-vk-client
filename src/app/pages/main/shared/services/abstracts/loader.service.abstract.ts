@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 
-import {ApiError} from '../../vk-api/methods/errors/api-error';
-import {AuthVkError} from '../../vk-api/methods/errors/token-error';
-import {StpError} from '../../../shared/supports/safe-type-parser';
+import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
+import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
+import {StpError} from '../../../../../shared/supports/safe-type-parser';
 
 
 export interface LoaderServiceDelegate {

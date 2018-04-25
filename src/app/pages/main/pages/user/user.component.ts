@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {PostsListService} from '../../../../core/services/posts-list.service';
-import {UserService} from '../../../../core/services/user.service';
-import {LoaderServiceDelegate} from '../../../../core/services/abstracts/loader.service.abstract';
+import {PostsListService} from '../../shared/services/posts-list.service';
+import {UserService} from '../../shared/services/user.service';
+import {LoaderServiceDelegate} from '../../shared/services/abstracts/loader.service.abstract';
 import {VkUser} from '../../../../core/vk-api/methods/models/vk-user.model';
 import {ApiError, eApiErrCode} from '../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
-import {FriendsListService} from '../../../../core/services/friends-list.service';
+import {FriendsListService} from '../../shared/services/friends-list.service';
 import {VkCurrentUserService} from '../../../../core/vk-api/methods/services/vk-current-user.service';
 
 
