@@ -28,10 +28,11 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
 
   get user(): VkUser { return this._userService.user; }
 
-  errorMsg = '';
+  get hasLoadError(): boolean { return this._userService.hasLoadError; }
 
-  isLoading = false;  // TODO: get isLoading()
-  hasLoadError = false;
+  get isLoading(): boolean { return this._userService.isLoading(); }
+
+  errorMsg = '';
 
 
   constructor(private _activatedRoute: ActivatedRoute,
@@ -42,15 +43,16 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
               private _friendsService: FriendsListService) {}
 
   ngOnInit() {
+    this._userService.loaderDelegate = this;
+
     this._activatedRoute.paramMap
       .subscribe((paramMap) => {
+
         const userIdParam = paramMap.get('id');
         if (userIdParam === this._currentUser.getId()) {
-          const childPath = this._activatedRoute.snapshot.children
-            .reduce((sum, v) => {
-              return sum + v.url.join('');
-            }, '');
-          this._router.navigate(['/im', childPath]);
+          const url = this._activatedRoute.snapshot.children
+            .reduce((sum, v) => sum + v.url.join(''), '/im');
+          this._router.navigate([url]);
           return;
         }
 
@@ -64,71 +66,63 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
 
     this._postsService.reset();
     this._friendsService.reset();
+    this._userService.reset();
 
-    this._userService.loaderDelegate = this;
-    this._userService.resetWithNewOwnerId(this.userNumId);
+    this._userService.changeOwnerId(this.userNumId);
   }
 
+  /** UI-Action */
+  onRefresh() {
+    this._userService.refresh();
+  }
 
   // --- LoaderServiceDelegate --- //
 
 
   lsdChangeOwnerId(ownerId: string): void {
-    this._userService.load();
+    if (ownerId) {
+      this._userService.refresh();
+    }
   }
 
-  lsdLoadInterceptor(ownerId: string): boolean {
-    this.isLoading = true;
-    return true;
-  }
+  lsdLoadInterceptor(ownerId: string): boolean { return true; }
 
   lsdSuccessHandler(newData: number): void {
-    this.hasLoadError = false;
     this.errorMsg = null;
-
     if (this.user.deactivated) {
-      console.log('|UserComponent view log|: Страница удалена или заблокирована.');
       this.errorMsg = 'Страница удалена или заблокирована.';
     }
   }
 
   lsdFailureHandler(err: ApiError|AuthVkError|Error): void {
-    this.hasLoadError = true;
     if (err instanceof AuthVkError) {
+
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
+
     } else if (err instanceof ApiError) {
+
       switch (err.code) {
         case eApiErrCode.INVALID_ID: {
-          console.log('|UserComponent view log|: Несуществующий id пользователя.');
           this.errorMsg = 'Несуществующий id пользователя.';
           break;
         }
-        // case eApiErrCode.ACCESS_DENIED: {
-        //   this.errorMsg = 'Доступ запрещен.';
-        //   break;
-        // }
-        // case eApiErrCode.DELETE_OR_BAN: {
-        //   this.errorMsg = 'Страница удалена или заблокирована.';
-        //   break;
-        // }
         case eApiErrCode.INVALID_PARAM: {
-          console.log('|UserComponent view log|: Такой страницы не существует.');
           this.errorMsg = 'Такой страницы не существует.';
           break;
         }
+        default: {
+          this.errorMsg = 'Ошибка доступа.';  // ошибка vk-api
+        }
       }
-    } else {
-      console.warn('Ошибка при загрузке пользователя. Попробуйте еще раз.');
+
     }
   }
 
   lsdFinallyHandler(): void {
-    this.isLoading = false;
-
     if (!this.errorMsg && !this.hasLoadError) {
-      this._postsService.resetWithNewOwnerId(this.userNumId);
-      this._friendsService.resetWithNewOwnerId(this.userNumId);
+      this._postsService.changeOwnerId(this.userNumId);
+      this._friendsService.changeOwnerId(this.userNumId);
     }
   }
 

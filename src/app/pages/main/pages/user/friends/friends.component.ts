@@ -15,32 +15,28 @@ import {FriendsListService} from '../../../shared/services/friends-list.service'
 })
 export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
-  get usersList(): VkUser[]|null { return this.friendsService.friends; }
+  get usersList(): VkUser[]|null { return this._friendsService.friends; }
 
-  get isLoading(): boolean { return this.friendsService.isLoading(); }
+  get isLoading(): boolean { return this._friendsService.isLoading(); }
 
-  hasLoadError = false;
+  get hasLoadError(): boolean { return this._friendsService.hasLoadError; }
 
   private readonly _loadScrollBottom = 3000;
 
 
   constructor(private _router: Router,
-              public friendsService: FriendsListService) {}
+              private _friendsService: FriendsListService) {}
 
   ngOnInit() {
-    this.friendsService.loaderDelegate = this;
-    if (!this.usersList && !this.isLoading && this.friendsService.userId) {
-      this.friendsService.refresh();
+    this._friendsService.loaderDelegate = this;
+    if (!this.usersList && !this.isLoading && this._friendsService.userId) {
+      this._friendsService.refresh();
     }
   }
 
   ngOnDestroy() {
-    this.friendsService.loaderDelegate = null;
+    this._friendsService.loaderDelegate = null;
   }
-
-
-  // --- actions --- //
-
 
   @HostListener('window:scroll')
   onScroll() {
@@ -48,15 +44,15 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
     const scrollBottom = window.innerHeight + window.scrollY;
     const scrollLeft = scrollHeight - scrollBottom;
     if (scrollLeft < this._loadScrollBottom) {
-      this.friendsService.load();
-      if (!this.isLoading && this.friendsService.userId) {
-        this.friendsService.load();
+      if (!this.isLoading && this._friendsService.userId) {
+        this._friendsService.load();
       }
     }
   }
 
+  /** UI-Action */
   onRefresh() {
-    this.friendsService.refresh();
+    this._friendsService.refresh();
   }
 
 
@@ -65,31 +61,21 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
 
   lsdChangeOwnerId(ownerId: string): void {
     if (ownerId) {
-      this.friendsService.refresh();
+      this._friendsService.refresh();
     }
   }
 
-  lsdLoadInterceptor(ownerId: string): boolean {
-    return true;
-  }
+  lsdLoadInterceptor(ownerId: string): boolean { return true; }
 
-  lsdSuccessHandler(newData: number): void {
-    this.hasLoadError = false;
-  }
+  lsdSuccessHandler(newData: number): void {}
 
   lsdFailureHandler(err: ApiError|AuthVkError|Error): void {
-    this.hasLoadError = true;
-
     if (err instanceof AuthVkError) {
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
-    } else {
-      // alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
-      console.warn('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
     }
   }
 
-  lsdFinallyHandler(): void {
-  }
+  lsdFinallyHandler(): void {}
 
 }

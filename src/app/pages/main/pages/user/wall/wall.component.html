@@ -3,7 +3,7 @@
                  [postsList]="postsList">
   </pg-posts-list>
 
-  <div *ngIf="postsList && postsList.posts && !postsList.posts.length && !isLoading && !hasLoadError && postsService.userId"
+  <div *ngIf="postsList && postsList.posts && !postsList.posts.length && !isLoading && !hasLoadError && _postsService.userId"
        class="container text-center">
     <p class="lead text-muted">У пользователя нет постов.</p>
   </div>

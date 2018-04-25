@@ -15,33 +15,28 @@ import {VkPostsList} from '../../../../../core/vk-api/methods/models/vk-posts-li
 })
 export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
-  get postsList(): VkPostsList|null { return this.postsService.postsList; }
+  get postsList(): VkPostsList|null { return this._postsService.postsList; }
 
-  get isLoading(): boolean { return this.postsService.isLoading(); }
+  get isLoading(): boolean { return this._postsService.isLoading(); }
 
-  hasLoadError = false;
-  userIdError = false;
+  get hasLoadError(): boolean { return this._postsService.hasLoadError; }
 
   private readonly _loadScrollBottom = 3000;
 
 
   constructor(private _router: Router,
-              public postsService: PostsListService) {}
+              private _postsService: PostsListService) {}
 
   ngOnInit() {
-    this.postsService.loaderDelegate = this;
-    if (!this.postsList && !this.isLoading && this.postsService.userId) {
-      this.postsService.refresh();
+    this._postsService.loaderDelegate = this;
+    if (!this.postsList && !this.isLoading && this._postsService.userId) {
+      this._postsService.refresh();
     }
   }
 
   ngOnDestroy(): void {
-    this.postsService.loaderDelegate = null;
+    this._postsService.loaderDelegate = null;
   }
-
-
-  // --- actions --- //
-
 
   @HostListener('window:scroll')
   onScroll() {
@@ -49,14 +44,15 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
     const scrollBottom = window.innerHeight + window.scrollY;
     const scrollLeft = scrollHeight - scrollBottom;
     if (scrollLeft < this._loadScrollBottom) {
-      if (!this.isLoading && this.postsService.userId) {
-        this.postsService.load();
+      if (!this.isLoading && this._postsService.userId) {
+        this._postsService.load();
       }
     }
   }
 
+  /** UI-Action */
   onRefresh() {
-    this.postsService.refresh();
+    this._postsService.refresh();
   }
 
 
@@ -64,44 +60,22 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
 
   lsdChangeOwnerId(ownerId: string): void {
-    this.userIdError = false;
     if (ownerId) {
-      this.postsService.refresh();
+      this._postsService.refresh();
     }
   }
 
-  lsdLoadInterceptor(ownerId: string): boolean {
-    return true;
-  }
+  lsdLoadInterceptor(ownerId: string): boolean { return true; }
 
-  lsdSuccessHandler(newData: number): void {
-    this.hasLoadError = false;
-  }
+  lsdSuccessHandler(newData: number): void {}
 
   lsdFailureHandler(err: ApiError|AuthVkError|Error): void {
-    this.hasLoadError = true;
-
     if (err instanceof AuthVkError) {
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
-    } else {
-      // alert('Ошибка при загрузке записей на стене. Попробуйте еще раз.');
-      console.warn('Ошибка при загрузке записей на стене. Попробуйте еще раз.');
     }
-
-    if (err instanceof ApiError) {
-      if (
-        err.code === eApiErrCode.INVALID_ID ||
-        err.code === eApiErrCode.ACCESS_DENIED ||
-        err.code === eApiErrCode.DELETE_OR_BAN
-      ) {
-        this.userIdError = true;
-      }
-    }
-
   }
 
-  lsdFinallyHandler(): void {
-  }
+  lsdFinallyHandler(): void {}
 
 }

@@ -35,7 +35,7 @@
     <div *ngIf="errorMsg" class="user__error">
       <p class="user__error-msg lead text-muted">{{errorMsg}}</p>
     </div>
-    <div *ngIf="user" class="counters__container">
+    <div *ngIf="user && !errorMsg" class="counters__container">
       <div class="counters__item">
         <p class="counters__item-name">друзей</p>
         <p class="counters__item-value">{{user.countFriends ? user.countFriends : '?'}}</p>

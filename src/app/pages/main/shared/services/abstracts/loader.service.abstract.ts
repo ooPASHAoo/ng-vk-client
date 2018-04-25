@@ -20,29 +20,27 @@ export interface LoaderServiceDelegate {
 @Injectable()
 export abstract class LoaderServiceAbstract<T> {
 
+  get userId(): string { return this._ownerId; }
+
+  get hasLoadError(): boolean { return this._hasLoadError; }
+
   loaderDelegate?: LoaderServiceDelegate;
 
   protected _ownerId: string;
   protected _data: T|null;
   private _dataLoader$: Subscription;
+  private _hasLoadError = false;
 
-  public get userId(): string {
-    return this._ownerId;
-  }
+  // resetWithNewOwnerId(ownerId: string) {
+  //   this.cancelLoading();
+  //   this.resetData();
+  //   this.changeOwnerId(ownerId);
+  // }
 
-
-  /** if (new ownerId) {reset()} */
-  resetWithNewOwnerId(ownerId: string) {
-    if (this._ownerId !== ownerId) {
-      this.cancelLoading();
-      this.resetData();
-      this._ownerId = ownerId;
-
-      const delegate = this.loaderDelegate;
-      if (delegate) {
-        delegate.lsdChangeOwnerId.call(delegate, this._ownerId);
-      }
-    }
+  reset() {
+    this.cancelLoading();
+    this.resetData();
+    this.changeOwnerId(null);
   }
 
   changeOwnerId(ownerId: string): boolean {
@@ -56,12 +54,6 @@ export abstract class LoaderServiceAbstract<T> {
       delegate.lsdChangeOwnerId.call(delegate, this._ownerId);
     }
     return true;
-  }
-
-  reset() {
-    this.cancelLoading();
-    this.resetData();
-    this.changeOwnerId(null);
   }
 
   /** cancelLoad+resetData+load */
@@ -78,6 +70,7 @@ export abstract class LoaderServiceAbstract<T> {
   }
 
   resetData() {
+    this._hasLoadError = false;
     this._data = null;
   }
 
@@ -128,6 +121,8 @@ export abstract class LoaderServiceAbstract<T> {
 
 
   protected _responseSuccessHandler(res: T) {
+    this._hasLoadError = false;
+
     this._dataConcat(res);
 
     const delegate = this.loaderDelegate;
@@ -138,6 +133,8 @@ export abstract class LoaderServiceAbstract<T> {
   }
 
   protected _responseFailureHandler(err: ApiError|AuthVkError|Error) {
+    this._hasLoadError = true;
+
     console.warn(`- PG: (${err['code']}) ${err.name} - ${err.message}`);
     if (err instanceof StpError) {
       console.dir(err.parseObject);
