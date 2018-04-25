@@ -25,8 +25,8 @@ export class VkApiFriendsService extends VkApiServiceAbstract {
   getFriends(userId: string, offset: number, count: number): Observable<VkUser[]> {
     const params = this.getDefaultParams()
       .set('user_id', userId)
-      .set('count', count.toString())
-      .set('offset', Math.min(offset, this.MAX_COUNT).toString());
+      .set('count', Math.min(count, this.MAX_COUNT).toString())
+      .set('offset', offset.toString());
 
     return this.httpJsonpGet(params).pipe(
       map(this._parseResponse)

@@ -25,8 +25,8 @@ export class VkApiWallService extends VkApiServiceAbstract {
   getPosts(ownerId: string, offset: number, count: number): Observable<VkPostsList> {
     const params = this.getDefaultParams()
       .set('owner_id', ownerId)
-      .set('count', count.toString())
-      .set('offset', Math.min(offset, this.MAX_COUNT).toString());
+      .set('count', Math.min(count, this.MAX_COUNT).toString())
+      .set('offset', offset.toString());
 
     return this.httpJsonpGet(params).pipe(
       map(VkApiWallService._parseResponse)
