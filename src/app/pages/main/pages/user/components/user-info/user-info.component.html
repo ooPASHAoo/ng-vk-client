@@ -9,9 +9,9 @@
       >
       <pg-loader-rect *ngIf="!user && !errorMsg"></pg-loader-rect>
     </div>
-    <div *ngIf="errorMsg" class="user__info info info__error">
-      <p class="lead text-muted">Ошибка!<br>{{errorMsg}}</p>
-    </div>
+    <!--<div *ngIf="errorMsg" class="user__info info info__error">-->
+      <!--<p class="lead text-muted">Ошибка!<br>{{errorMsg}}</p>-->
+    <!--</div>-->
     <div *ngIf="user" class="user__info info">
       <h2 class="info__header">{{user.firstName}} {{user.lastName}}</h2>
       <hr class="info__separate">
@@ -35,6 +35,9 @@
   </div>
 
   <div class="user__counters counters border-top">
+    <div *ngIf="errorMsg" class="user__error">
+      <p class="user__error-msg lead text-muted">{{errorMsg}}</p>
+    </div>
     <div *ngIf="user" class="counters__container">
       <div class="counters__item">
         <p class="counters__item-name">друзей</p>

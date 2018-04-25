@@ -23,6 +23,8 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
     return this.postsService.isLoading();
   }
 
+  compName = 'wall';
+
   hasLoadError = false;
   userIdError = false;
 
@@ -34,8 +36,9 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
   ngOnInit() {
     this.postsService.loaderDelegate = this;
-    if (!this.postsService.postsList && this.postsService.userId) {
-      this.postsService.load();
+    if (!this.postsList && !this.isLoading && this.postsService.userId) {
+      console.log('- PG:', '>>> wall: ngOnInit');
+      this.postsService.refresh();
     }
   }
 
@@ -53,11 +56,15 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
     const scrollBottom = window.innerHeight + window.scrollY;
     const scrollLeft = scrollHeight - scrollBottom;
     if (scrollLeft < this._loadScrollBottom) {
-      this.postsService.load();
+      if (!this.isLoading && this.postsService.userId) {
+        console.log('- PG:', '>>> wall: onScroll');
+        this.postsService.load();
+      }
     }
   }
 
   onRefresh() {
+    console.log('- PG:', '>>> wall: onRefresh');
     this.postsService.refresh();
   }
 
@@ -67,7 +74,10 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
   lsdChangeOwnerId(ownerId: string): void {
     this.userIdError = false;
-    this.postsService.refresh();
+    if (ownerId) {
+      console.log('- PG:', '>>> wall: lsdChangeOwnerId');
+      this.postsService.refresh();
+    }
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {

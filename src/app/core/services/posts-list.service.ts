@@ -57,7 +57,7 @@ export class PostsListService extends LoaderListServiceAbstract<VkPostsList> {
   protected _dataConcat(newData: VkPostsList): void {
     if (this._data) {
       VkPostsList.assign(this._data, newData);
-    } else if (newData && newData.posts && newData.posts.length) {
+    } else if (newData) {
       this._data = newData;
     }
 

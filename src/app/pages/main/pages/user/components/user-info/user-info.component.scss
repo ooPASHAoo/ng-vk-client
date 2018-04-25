@@ -22,8 +22,20 @@
 
   // - bot line - //
 
-  .user__counters {
+  &__counters {
+    //display: flex;
+  }
 
+  &__error {
+    min-height: 75px;
+    display: flex;
+    align-items: center;
+    //text-align: center;
+    justify-content: center;
+  }
+  &__error-msg {
+    margin: 0;
+    //text-align: center;
   }
 }
 
@@ -41,11 +53,11 @@
   padding: 10px;
   overflow: scroll;
 
-  &__error {
-    display: flex;
-    align-items: center;
-    text-align: center;
-  }
+  //&__error {
+  //  display: flex;
+  //  align-items: center;
+  //  text-align: center;
+  //}
 
   &__header {
     margin: 0;

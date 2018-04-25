@@ -22,6 +22,9 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
   get isLoading(): boolean {
     return this.friendsService.isLoading();
   }
+
+  compName = 'wall';
+
   hasLoadError = false;
 
   private readonly _loadScrollBottom = 3000;
@@ -32,9 +35,10 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
 
   ngOnInit() {
     this.friendsService.loaderDelegate = this;
-    if (!this.friendsService.friends && this.friendsService.userId) {
-      // this.friendsService.refresh();
-      this.friendsService.load();
+    if (!this.usersList && !this.isLoading && this.friendsService.userId) {
+      console.log('- PG:', '>>> friends: ngOnInit');
+      // this.friendsService.load();
+      this.friendsService.refresh();
     }
   }
 
@@ -53,10 +57,15 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
     const scrollLeft = scrollHeight - scrollBottom;
     if (scrollLeft < this._loadScrollBottom) {
       this.friendsService.load();
+      if (!this.isLoading && this.friendsService.userId) {
+        console.log('- PG:', '>>> friends: onScroll');
+        this.friendsService.load();
+      }
     }
   }
 
   onRefresh() {
+    console.log('- PG:', '>>> friends: onRefresh');
     this.friendsService.refresh();
   }
 
@@ -65,7 +74,10 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
 
 
   lsdChangeOwnerId(ownerId: string): void {
-    this.friendsService.refresh();
+    if (ownerId) {
+      console.log('- PG:', '>>> friends: lsdChangeOwnerId');
+      this.friendsService.refresh();
+    }
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {

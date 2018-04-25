@@ -2,7 +2,7 @@
                [usersList]="usersList">
 </pg-users-list>
 
-<div *ngIf="!usersList && !isLoading && !hasLoadError && friendsService.userId"
+<div *ngIf="usersList && !usersList.length && !isLoading && !hasLoadError && friendsService.userId"
      class="container text-center">
   <p class="lead text-muted">У пользователя нет друзей =(</p>
 </div>

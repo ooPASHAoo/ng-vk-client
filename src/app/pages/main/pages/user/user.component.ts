@@ -45,6 +45,7 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
     this._activatedRoute.paramMap
       .subscribe((paramMap) => {
         const userIdParam = paramMap.get('id');
+        console.log('----- >', userIdParam, '< -----');
         if (userIdParam === this._currentUser.getId()) {
           const childPath = this._activatedRoute.snapshot.children
             .reduce((sum, v) => {
@@ -56,16 +57,15 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
 
         this.changeUserId(userIdParam);
       });
+    // console.log('- PG:', '_T_E_S_T_');
   }
 
   changeUserId(userId: string) {
     this.userId = userId;
     this.userNumId = (userId === 'im') ? this._currentUser.getId() : userId;
 
-    this._postsService.cancelLoading();
-    this._postsService.resetData();
-    this._friendsService.cancelLoading();
-    this._friendsService.resetData();
+    this._postsService.reset();
+    this._friendsService.reset();
 
     this._userService.loaderDelegate = this;
     this._userService.resetWithNewOwnerId(this.userNumId);
@@ -85,30 +85,25 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
   }
 
   lsdSuccessHandler(newData: number): void {
-    console.log('- PG:', 'lsdSuccessHandler');
     this.hasLoadError = false;
+    this.errorMsg = null;
 
-    console.log('- PG:', '--1--');
     if (this.user.deactivated) {
-      console.log('- PG:', '--2--');
+      console.log('|UserComponent view log|: Страница удалена или заблокирована.');
       this.errorMsg = 'Страница удалена или заблокирована.';
     }
 
   }
 
   lsdFailureHandler(err: ApiError|AuthVkError|Error): void {
-    console.log('- PG:', 'lsdFailureHandler');
     this.hasLoadError = true;
     if (err instanceof AuthVkError) {
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
-    } else {
-      alert('Ошибка при загрузке пользователя. Попробуйте еще раз.');
-    }
-
-    if (err instanceof ApiError) {
+    } else if (err instanceof ApiError) {
       switch (err.code) {
         case eApiErrCode.INVALID_ID: {
+          console.log('|UserComponent view log|: Несуществующий id пользователя.');
           this.errorMsg = 'Несуществующий id пользователя.';
           break;
         }
@@ -120,16 +115,22 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
         //   this.errorMsg = 'Страница удалена или заблокирована.';
         //   break;
         // }
+        case eApiErrCode.INVALID_PARAM: {
+          console.log('|UserComponent view log|: Такой страницы не существует.');
+          this.errorMsg = 'Такой страницы не существует.';
+          break;
+        }
       }
+    } else {
+      console.warn('Ошибка при загрузке пользователя. Попробуйте еще раз.');
     }
 
   }
 
   lsdFinallyHandler(): void {
     this.isLoading = false;
-    console.log('- PG:', '>>>');
+
     if (!this.errorMsg && !this.hasLoadError) {
-      console.log('- PG:', '>>> YES');
       this._postsService.resetWithNewOwnerId(this.userNumId);
       this._friendsService.resetWithNewOwnerId(this.userNumId);
     }

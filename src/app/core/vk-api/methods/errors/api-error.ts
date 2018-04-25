@@ -3,6 +3,7 @@ export enum eApiErrCode {
   MANY_PER_SECOND = 6,
   ACCESS_DENIED = 15,
   DELETE_OR_BAN = 18,
+  INVALID_PARAM = 100,
   INVALID_ID = 113
 
 }

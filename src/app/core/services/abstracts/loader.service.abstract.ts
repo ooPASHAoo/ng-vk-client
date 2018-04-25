@@ -5,6 +5,7 @@ import {AuthVkError} from '../../vk-api/methods/errors/token-error';
 import {Subscription} from 'rxjs/Subscription';
 import {StpError} from '../../../shared/supports/safe-type-parser';
 import {Observable} from 'rxjs/Observable';
+import {delay} from 'rxjs/operators';
 
 
 export interface LoaderServiceDelegate {
@@ -48,6 +49,25 @@ export abstract class LoaderServiceAbstract<T> {
     }
   }
 
+  changeOwnerId(ownerId: string): boolean {
+    if (this._ownerId === ownerId) {
+      return false;
+    }
+
+    this._ownerId = ownerId;
+    const delegate = this.loaderDelegate;
+    if (delegate) {
+      delegate.lsdChangeOwnerId.call(delegate, this._ownerId);
+    }
+    return true;
+  }
+
+  reset() {
+    this.cancelLoading();
+    this.resetData();
+    this.changeOwnerId(null);
+  }
+
   /** cancelLoad+resetData+load */
   refresh() {
     this.cancelLoading();
@@ -74,6 +94,7 @@ export abstract class LoaderServiceAbstract<T> {
   load(): boolean {
     if (!this._ownerId) {
       console.warn('LoaderService: need ownerId');
+      console.log('- PG:', 'component name', this.loaderDelegate['compName']);
       return false;
     }
     if (this.isLoading()) {
@@ -120,7 +141,7 @@ export abstract class LoaderServiceAbstract<T> {
   }
 
   protected _responseFailureHandler(err: ApiError|AuthVkError|Error) {
-    console.warn(`- PG: ${err.name} - ${err.message}`);
+    console.warn(`- PG: (${err['code']}) ${err.name} - ${err.message}`);
     if (err instanceof StpError) {
       console.dir(err.parseObject);
     }

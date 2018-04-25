@@ -37,7 +37,7 @@ export class FriendsListService extends LoaderListServiceAbstract<VkUser[]> {
   protected _dataConcat(newData: VkUser[]): void {
     if (this._data) {
       this._data.push(...newData);
-    } else if (newData && newData.length) {
+    } else if (newData) {
       this._data = newData;
     }
   }
