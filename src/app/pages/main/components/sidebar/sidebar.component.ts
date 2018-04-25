@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
     }
 
     const duration = 500;
-    const fps = 60;
+    const fps = 20; // 60 fps view has freeze
     //
     const spf = 1000 / fps;
     const stepCount = duration / spf;
