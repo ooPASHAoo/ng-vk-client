@@ -21,6 +21,10 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
   get hasLoadError(): boolean { return this._postsService.hasLoadError; }
 
+  get userId(): string { return this._postsService.userId; }
+
+  get hasPosts(): boolean { return this._postsService.isData(); }
+
   private readonly _loadScrollBottom = 3000;
 
 

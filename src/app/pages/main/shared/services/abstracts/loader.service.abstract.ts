@@ -37,6 +37,10 @@ export abstract class LoaderServiceAbstract<T> {
   //   this.changeOwnerId(ownerId);
   // }
 
+  isData(): boolean {
+    return this._data && (this._dataLength(this._data) > 0);
+  }
+
   reset() {
     this.cancelLoading();
     this.resetData();

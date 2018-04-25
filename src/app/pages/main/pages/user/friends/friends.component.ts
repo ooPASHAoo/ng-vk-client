@@ -21,6 +21,10 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
 
   get hasLoadError(): boolean { return this._friendsService.hasLoadError; }
 
+  get userId(): string { return this._friendsService.userId; }
+
+  get hasUsers(): boolean { return this._friendsService.isData(); }
+
   private readonly _loadScrollBottom = 3000;
 
 
