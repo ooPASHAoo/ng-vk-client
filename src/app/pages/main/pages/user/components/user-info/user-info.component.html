@@ -7,7 +7,10 @@
                   user.photoUrl200 ? user.photoUrl200 :
                   user.photoUrl200orig}}"
       >
-      <pg-loader-rect *ngIf="!user"></pg-loader-rect>
+      <pg-loader-rect *ngIf="!user && !errorMsg"></pg-loader-rect>
+    </div>
+    <div *ngIf="errorMsg" class="user__info info info__error">
+      <p class="lead text-muted">Ошибка!<br>{{errorMsg}}</p>
     </div>
     <div *ngIf="user" class="user__info info">
       <h2 class="info__header">{{user.firstName}} {{user.lastName}}</h2>

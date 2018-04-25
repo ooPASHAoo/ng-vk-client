@@ -5,6 +5,7 @@ import {LoaderServiceAbstract} from './abstracts/loader.service.abstract';
 import {VkUser} from '../vk-api/methods/models/vk-user.model';
 import {VkApiFriendsService} from '../vk-api/methods/services/vk-api-friends.service';
 import {LoaderListServiceAbstract} from './abstracts/loader-list.service.abstract';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class FriendsListService extends LoaderListServiceAbstract<VkUser[]> {

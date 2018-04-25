@@ -17,6 +17,7 @@ import {fadeInOutAnimation} from '../../../../../../shared/animations/fade-in-ou
 export class UserInfoComponent implements OnInit {
 
   @Input() user: VkUser;
+  @Input() errorMsg: string;
 
   constructor() {
   }

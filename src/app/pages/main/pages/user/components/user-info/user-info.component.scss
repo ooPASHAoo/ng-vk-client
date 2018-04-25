@@ -41,6 +41,12 @@
   padding: 10px;
   overflow: scroll;
 
+  &__error {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
   &__header {
     margin: 0;
     font-size: 20px;

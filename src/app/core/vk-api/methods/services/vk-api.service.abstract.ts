@@ -7,6 +7,7 @@ import {timer} from 'rxjs/observable/timer';
 import {VkTokenService} from '../../token/services/vk-token.service';
 import {AuthVkError} from '../errors/token-error';
 import {ApiError, eApiErrCode} from '../errors/api-error';
+import {createError} from '@angular/core/src/render3/instructions';
 
 @Injectable()
 export abstract class VkApiServiceAbstract {

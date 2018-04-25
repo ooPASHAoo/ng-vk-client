@@ -1,14 +1,16 @@
-<pg-posts-list *ngIf="postsList"
-               [postsList]="postsList">
-</pg-posts-list>
+<div *ngIf="!userIdError">
+  <pg-posts-list *ngIf="postsList"
+                 [postsList]="postsList">
+  </pg-posts-list>
 
-<div *ngIf="!postsList && !isLoading && !hasLoadError"
-     class="container text-center">
-  <p class="lead text-muted">У пользователя нет постов.</p>
+  <div *ngIf="!postsList && !isLoading && !hasLoadError && postsService.userId"
+       class="container text-center">
+    <p class="lead text-muted">У пользователя нет постов.</p>
+  </div>
+
+  <pg-spinner *ngIf="isLoading"></pg-spinner>
+
+  <pg-error-retry *ngIf="!isLoading && hasLoadError"
+                  (retry)="onRefresh()">
+  </pg-error-retry>
 </div>
-
-<pg-spinner *ngIf="isLoading"></pg-spinner>
-
-<pg-error-retry *ngIf="!isLoading && hasLoadError"
-                (retry)="onRefresh()">
-</pg-error-retry>

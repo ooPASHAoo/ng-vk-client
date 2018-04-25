@@ -1,7 +1,7 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {VkTokenService} from '../../../../../core/vk-api/token/services/vk-token.service';
-import {ApiError} from '../../../../../core/vk-api/methods/errors/api-error';
+import {ApiError, eApiErrCode} from '../../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
 import {PostsListService} from '../../../../../core/services/posts-list.service';
 import {LoaderServiceDelegate} from '../../../../../core/services/abstracts/loader.service.abstract';
@@ -24,6 +24,7 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
   }
 
   hasLoadError = false;
+  userIdError = false;
 
   private readonly _loadScrollBottom = 3000;
 
@@ -33,7 +34,7 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
   ngOnInit() {
     this.postsService.loaderDelegate = this;
-    if (!this.postsService.postsList) {
+    if (!this.postsService.postsList && this.postsService.userId) {
       this.postsService.load();
     }
   }
@@ -65,7 +66,8 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
 
   lsdChangeOwnerId(ownerId: string): void {
-    this.postsService.load();
+    this.userIdError = false;
+    this.postsService.refresh();
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {
@@ -84,8 +86,38 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
     } else {
-      alert('Ошибка при загрузке записей на стене. Попробуйте еще раз.');
+      // alert('Ошибка при загрузке записей на стене. Попробуйте еще раз.');
+      console.warn('Ошибка при загрузке записей на стене. Попробуйте еще раз.');
     }
+
+    if (err instanceof ApiError) {
+      if (
+        err.code === eApiErrCode.INVALID_ID ||
+        err.code === eApiErrCode.ACCESS_DENIED ||
+        err.code === eApiErrCode.DELETE_OR_BAN
+      ) {
+        this.userIdError = true;
+      }
+
+      // switch (err.code) {
+      //   case eApiErrCode.INVALID_ID: {
+      //     // this.errorMsg = 'Несуществующий id пользователя.';
+      //     console.log('Несуществующий id пользователя.');
+      //     break;
+      //   }
+      //   case eApiErrCode.ACCESS_DENIED: {
+      //     // this.errorMsg = 'Доступ запрещен.';
+      //     console.log('Доступ запрещен.');
+      //     break;
+      //   }
+      //   case eApiErrCode.DELETE_OR_BAN: {
+      //     // this.errorMsg = 'Страница удалена или заблокирована.';
+      //     console.log('Страница удалена или заблокирована.');
+      //     break;
+      //   }
+      // }
+    }
+
   }
 
   lsdFinallyHandler(): void {

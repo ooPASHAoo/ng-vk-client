@@ -32,7 +32,7 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
 
   ngOnInit() {
     this.friendsService.loaderDelegate = this;
-    if (!this.friendsService.friends) {
+    if (!this.friendsService.friends && this.friendsService.userId) {
       // this.friendsService.refresh();
       this.friendsService.load();
     }
@@ -65,10 +65,11 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
 
 
   lsdChangeOwnerId(ownerId: string): void {
-    this.friendsService.load();
+    this.friendsService.refresh();
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {
+    // console.log('- PG:', 'friends: ', ownerId);
     // this.isLoading = true;
     return true;
   }
@@ -84,7 +85,8 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
       alert(err.userDescription);
       this._router.navigate([err.loginRoute]);
     } else {
-      alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
+      // alert('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
+      console.warn('Ошибка при загрузке списка друзей. Попробуйте еще раз.');
     }
   }
 

@@ -26,6 +26,10 @@ export abstract class LoaderServiceAbstract<T> {
 
   loaderDelegate?: LoaderServiceDelegate;
 
+  public get userId(): string {
+    return this._ownerId;
+  }
+
   protected _ownerId: string;
   protected _data: T|null;
   private _dataLoader$: Subscription;

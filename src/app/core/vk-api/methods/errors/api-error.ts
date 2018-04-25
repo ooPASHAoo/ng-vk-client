@@ -1,6 +1,10 @@
 export enum eApiErrCode {
   UNKNOWN = 1,
   MANY_PER_SECOND = 6,
+  ACCESS_DENIED = 15,
+  DELETE_OR_BAN = 18,
+  INVALID_ID = 113
+
 }
 
 export class ApiError extends Error {

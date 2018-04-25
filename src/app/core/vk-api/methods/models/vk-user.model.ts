@@ -7,6 +7,8 @@ export class VkUser {
   firstName: string;
   lastName: string;
 
+  deactivated: string|null;
+
   photoUrl400orig: string|null;
   photoUrl400: string|null;
   photoUrl200orig: string|null;
@@ -30,10 +32,13 @@ export class VkUser {
     const stp = new Stp(userData);
     const user = new VkUser();
 
+    // console.log('- PG:', userData);
+
     user.id = stp.get(['id'], Number, true).toString();
     user.firstName = stp.get(['first_name'], String, true);
     user.lastName = stp.get(['last_name'], String, true);
     //
+    user.deactivated = stp.get(['deactivated'], String);
     user.photoUrl400orig = stp.get(['photo_400_orig'], String);
     user.photoUrl400 = stp.get(['photo_400'], String);
     user.photoUrl200orig = stp.get(['photo_200_orig'], String);
