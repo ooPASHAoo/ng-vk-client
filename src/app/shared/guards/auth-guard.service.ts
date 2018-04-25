@@ -7,19 +7,17 @@ import {Observable} from 'rxjs/Observable';
 
 import {VkTokenService} from '../../core/vk-api/token/services/vk-token.service';
 
+
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private _router: Router, private _tokenService: VkTokenService) {
-  }
+  constructor(private _router: Router, private _tokenService: VkTokenService) {}
 
   canLoad(route: Route): Observable<boolean>|Promise<boolean>|boolean {
-    // console.log('- PG:', 'canLoad');
     return this._isCan();
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
-    // console.log('- PG:', 'canActivate');
     return this._isCan();
   }
 
@@ -27,7 +25,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.canActivate(childRoute, state);
   }
 
+
   // --- private --- //
+
 
   _isCan() {
     if (this._tokenService.isHasActualLocalToken()) {
@@ -37,4 +37,5 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       return false;
     }
   }
+
 }

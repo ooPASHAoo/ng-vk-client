@@ -7,6 +7,7 @@ import {LoaderServiceDelegate} from '../../../../../core/services/abstracts/load
 import {VkUser} from '../../../../../core/vk-api/methods/models/vk-user.model';
 import {FriendsListService} from '../../../../../core/services/friends-list.service';
 
+
 @Component({
   selector: 'pg-friends',
   templateUrl: './friends.component.html',
@@ -14,30 +15,21 @@ import {FriendsListService} from '../../../../../core/services/friends-list.serv
 })
 export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
-  get usersList(): VkUser[]|null {
-    return this.friendsService.friends;
-  }
+  get usersList(): VkUser[]|null { return this.friendsService.friends; }
 
-  // isLoading = false;
-  get isLoading(): boolean {
-    return this.friendsService.isLoading();
-  }
-
-  compName = 'wall';
+  get isLoading(): boolean { return this.friendsService.isLoading(); }
 
   hasLoadError = false;
 
   private readonly _loadScrollBottom = 3000;
 
+
   constructor(private _router: Router,
-              public friendsService: FriendsListService) {
-  }
+              public friendsService: FriendsListService) {}
 
   ngOnInit() {
     this.friendsService.loaderDelegate = this;
     if (!this.usersList && !this.isLoading && this.friendsService.userId) {
-      console.log('- PG:', '>>> friends: ngOnInit');
-      // this.friendsService.load();
       this.friendsService.refresh();
     }
   }
@@ -58,14 +50,12 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
     if (scrollLeft < this._loadScrollBottom) {
       this.friendsService.load();
       if (!this.isLoading && this.friendsService.userId) {
-        console.log('- PG:', '>>> friends: onScroll');
         this.friendsService.load();
       }
     }
   }
 
   onRefresh() {
-    console.log('- PG:', '>>> friends: onRefresh');
     this.friendsService.refresh();
   }
 
@@ -75,14 +65,11 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
 
   lsdChangeOwnerId(ownerId: string): void {
     if (ownerId) {
-      console.log('- PG:', '>>> friends: lsdChangeOwnerId');
       this.friendsService.refresh();
     }
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {
-    // console.log('- PG:', 'friends: ', ownerId);
-    // this.isLoading = true;
     return true;
   }
 
@@ -103,7 +90,6 @@ export class FriendsComponent implements OnInit, OnDestroy, LoaderServiceDelegat
   }
 
   lsdFinallyHandler(): void {
-    // this.isLoading = false;
   }
 
 }

@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+
 import {LoaderServiceAbstract} from './loader.service.abstract';
 
 
@@ -10,13 +11,10 @@ export abstract class LoaderListServiceAbstract<T> extends LoaderServiceAbstract
   protected _isDataEnd = false;
 
 
-  // /** Danger method */
-  // setOffset(offset: number) {
-  //   this._offset = offset;
-  //   if (this._postsList) {
-  //     this._isPostsEnd = (this._offset >= this._postsList.maxCount);
-  //   }
-  // }
+  /** Danger method */
+  setOffset(offset: number) {
+    this._offset = offset;
+  }
 
   /** Danger method */
   protected _setCount(count: number) {

@@ -3,6 +3,7 @@ import {VkMedia} from './vk-media.model.abstract';
 import {VkMediaLink} from './vk-media-link.model';
 import {VkMediaPhoto} from './vk-media-photo.model';
 
+
 export class VkPost {
 
   id: string;

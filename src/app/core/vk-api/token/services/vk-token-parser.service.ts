@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 
 import {VkTokenModel} from '../models/vk-token.model';
 
+
 @Injectable()
 export class VkTokenParserService {
 
@@ -15,7 +16,9 @@ export class VkTokenParserService {
     }
   }
 
+
   // --- private --- //
+
 
   private _parseHashToObj(hash: string): object {
     const params = {};
@@ -70,7 +73,9 @@ export class VkTokenParserService {
       resolve(tokenModel);
     });
   }
+
 }
+
 
 // error=access_denied&
 // error_reason=user_denied&

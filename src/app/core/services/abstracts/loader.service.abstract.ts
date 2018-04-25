@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 import {ApiError} from '../../vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../vk-api/methods/errors/token-error';
-import {Subscription} from 'rxjs/Subscription';
 import {StpError} from '../../../shared/supports/safe-type-parser';
-import {Observable} from 'rxjs/Observable';
-import {delay} from 'rxjs/operators';
 
 
 export interface LoaderServiceDelegate {
 
   lsdChangeOwnerId(ownerId: string): void;
-
   lsdLoadInterceptor(ownerId: string): boolean;
-
   lsdSuccessHandler(newData: number): void;
-
   lsdFailureHandler(err: ApiError|AuthVkError|Error): void;
-
   lsdFinallyHandler(): void;
 }
 
@@ -27,13 +22,14 @@ export abstract class LoaderServiceAbstract<T> {
 
   loaderDelegate?: LoaderServiceDelegate;
 
+  protected _ownerId: string;
+  protected _data: T|null;
+  private _dataLoader$: Subscription;
+
   public get userId(): string {
     return this._ownerId;
   }
 
-  protected _ownerId: string;
-  protected _data: T|null;
-  private _dataLoader$: Subscription;
 
   /** if (new ownerId) {reset()} */
   resetWithNewOwnerId(ownerId: string) {
@@ -118,7 +114,7 @@ export abstract class LoaderServiceAbstract<T> {
   }
 
 
-  // --- abstracts --- //
+  // --- abstract --- //
 
 
   protected abstract _dataLoader(): Observable<T>;
@@ -129,6 +125,7 @@ export abstract class LoaderServiceAbstract<T> {
 
 
   // --- protected --- //
+
 
   protected _responseSuccessHandler(res: T) {
     this._dataConcat(res);
@@ -152,4 +149,5 @@ export abstract class LoaderServiceAbstract<T> {
       delegate.lsdFinallyHandler.call(delegate);
     }
   }
+
 }

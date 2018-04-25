@@ -7,6 +7,7 @@ import {OauthCallbackComponent} from './pages/oauth-callback/oauth-callback.comp
 import {AuthComponent} from './pages/auth/auth.component';
 import {OauthVkService} from '../../core/vk-api/oauth/vk-oauth.service';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +19,7 @@ import {OauthVkService} from '../../core/vk-api/oauth/vk-oauth.service';
     AuthComponent
   ],
   providers: [
-    OauthVkService,
+    OauthVkService
   ]
 })
 export class LoginModule {

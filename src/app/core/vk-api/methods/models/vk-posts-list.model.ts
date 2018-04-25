@@ -1,14 +1,15 @@
+import {Stp} from '../../../../shared/supports/safe-type-parser';
 import {VkUser} from './vk-user.model';
 import {VkGroup} from './vk-group.model';
 import {VkPost} from './vk-post.model';
-import {Stp} from '../../../../shared/supports/safe-type-parser';
+
 
 export class VkPostsList {
 
   posts: VkPost[];
   maxCount: number;
-  relatedUsers: { [userId: string]: VkUser }|null;
-  relatedGroups: { [groupId: string]: VkGroup }|null;
+  relatedUsers: {[userId: string]: VkUser}|null;
+  relatedGroups: {[groupId: string]: VkGroup}|null;
 
 
   /** @throws StpError */

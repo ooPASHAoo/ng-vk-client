@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {VkTokenService} from '../../../../core/vk-api/token/services/vk-token.service';
 import {VkCurrentUserService} from '../../../../core/vk-api/methods/services/vk-current-user.service';
+
 
 @Component({
   selector: 'pg-header',
@@ -12,8 +12,7 @@ import {VkCurrentUserService} from '../../../../core/vk-api/methods/services/vk-
 export class HeaderComponent {
 
   constructor(private _router: Router,
-              private _currentUser: VkCurrentUserService) {
-  }
+              private _currentUser: VkCurrentUserService) {}
 
   onLogout() {
     // TODO: Красивое окошко
@@ -23,4 +22,5 @@ export class HeaderComponent {
       this._router.navigate(['/login']);
     }
   }
+
 }

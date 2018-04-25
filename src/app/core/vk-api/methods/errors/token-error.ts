@@ -10,4 +10,5 @@ export class AuthVkError extends Error {
     // Для работы instanceof
     Object.setPrototypeOf(this, AuthVkError.prototype);
   }
+
 }

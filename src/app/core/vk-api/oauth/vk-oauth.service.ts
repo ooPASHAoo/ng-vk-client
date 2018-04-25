@@ -4,6 +4,7 @@ import {HttpParams} from '@angular/common/http';
 import {OAUTH_REDIRECT_URI} from './vk-oauth.const';
 import {VK_APP_ID} from '../vk-api.const';
 
+
 @Injectable()
 export class OauthVkService {
 
@@ -32,4 +33,5 @@ export class OauthVkService {
 
     return `https://oauth.vk.com/authorize?${params.toString()}`;
   }
+
 }

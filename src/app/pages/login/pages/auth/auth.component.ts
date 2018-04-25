@@ -7,6 +7,7 @@ import {VkTokenParserService} from '../../../../core/vk-api/token/services/vk-to
 import {VkTokenModel} from '../../../../core/vk-api/token/models/vk-token.model';
 import {VkTokenStorageService} from '../../../../core/vk-api/token/services/vk-token-storage.service';
 
+
 @Component({
   selector: 'pg-auth',
   templateUrl: './auth.component.html',
@@ -36,13 +37,17 @@ export class AuthComponent implements OnInit, OnDestroy {
     window.removeEventListener(OAUTH_EVENT, this._oauthListener);
   }
 
+
   // --- actions --- //
+
 
   onLogin() {
     this._oauthVk.showPopupAuth();
   }
 
+
   // --- private --- //
+
 
   private _oauthHandler(resultHash: string) {
     this._tokenParser.parseHash(resultHash)

@@ -1,5 +1,7 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
+
 import {VkCurrentUserService} from '../../../../core/vk-api/methods/services/vk-current-user.service';
+
 
 @Component({
   selector: 'pg-sidebar',
@@ -13,13 +15,13 @@ export class SidebarComponent implements OnInit {
   userId: string;
   isShowUpBtn = false;
 
+
   @HostListener('window:scroll')
   onScroll() {
     this.isShowUpBtn = (window.scrollY > this._maxTopOffset);
   }
 
-  constructor(private _currentUser: VkCurrentUserService) {
-  }
+  constructor(private _currentUser: VkCurrentUserService) {}
 
   ngOnInit() {
     this.userId = this._currentUser.getId();
@@ -28,6 +30,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  /** скролит за линейное время, если не мешать */
   goToTop() {
     if (!this.isShowUpBtn) {
       return;
@@ -62,5 +65,3 @@ export class SidebarComponent implements OnInit {
   }
 
 }
-
-// goToTop() - скролит за линейное время, если не мешать =)

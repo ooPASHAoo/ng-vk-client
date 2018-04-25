@@ -1,5 +1,6 @@
-import {VkMedia} from './vk-media.model.abstract';
 import {Stp} from '../../../../shared/supports/safe-type-parser';
+import {VkMedia} from './vk-media.model.abstract';
+
 
 export class VkMediaPhoto extends VkMedia {
 

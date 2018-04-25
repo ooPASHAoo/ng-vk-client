@@ -3,9 +3,10 @@ import {HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 
-import {VkApiServiceAbstract} from './vk-api.service.abstract';
 import {Stp} from '../../../../shared/supports/safe-type-parser';
+import {VkApiServiceAbstract} from './vk-api.service.abstract';
 import {VkGroup} from '../models/vk-group.model';
+
 
 @Injectable()
 export class VkApiGroupsService extends VkApiServiceAbstract {

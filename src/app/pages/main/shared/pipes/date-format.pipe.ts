@@ -3,11 +3,13 @@ import {Pipe, PipeTransform} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 
+
 enum eDateFormat {
   Default = '',
   WallPost = 'WallPost',
   Age = 'Age'
 }
+
 
 // 1 минуту назад ... 59 минут назад
 // час назад ... шесть часов назад
@@ -43,6 +45,10 @@ export class DateFormatPipe implements PipeTransform {
         return mDate.format('HH:mm DD.MM.YYYY');
     }
   }
+
+
+  // --- private --- //
+
 
   private _formatAge(date: Moment): string {
     const years = moment().diff(date, 'years');

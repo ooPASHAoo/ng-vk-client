@@ -23,24 +23,20 @@
   // - bot line - //
 
   &__counters {
-    //display: flex;
   }
 
   &__error {
     min-height: 75px;
     display: flex;
     align-items: center;
-    //text-align: center;
     justify-content: center;
   }
   &__error-msg {
     margin: 0;
-    //text-align: center;
   }
 }
 
 .avatar {
-
 
   &__img {
     width: 100%;
@@ -52,12 +48,6 @@
 .info {
   padding: 10px;
   overflow: scroll;
-
-  //&__error {
-  //  display: flex;
-  //  align-items: center;
-  //  text-align: center;
-  //}
 
   &__header {
     margin: 0;

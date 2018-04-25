@@ -1,33 +1,14 @@
 <div class="nav flex-column">
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./">Поиск</a>-->
-  <hr>
+  <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+     [routerLink]="['/im']">Моя страница</a>
   <a class="nav-link" routerLinkActive="active"
-     [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/im']">Моя страница</a>
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./feed">- Новости</a>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./messages">- Сообщения</a>-->
-
-
-  <a class="nav-link" routerLinkActive="active" [routerLink]="['/im', 'friends']">Мои друзья</a>
-
-
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./music">- Музыка</a>-->
-  <!--<hr>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./fellow/people">- Круг общения</a>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./fellow/school">- Одноклассники</a>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./fellow/hei">- Однокурсники</a>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./fellow/work">- Коллеги</a>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./fellow/kind">- Родственники</a>-->
-  <!--<hr>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./friends-likes">- Лайки друзей</a>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./common-friends">- Общие друзья</a>-->
-  <!--<a class="nav-link" routerLinkActive="active" routerLink="./birth-date">- Дата рождения</a>-->
+     [routerLink]="['/im', 'friends']">Мои друзья</a>
 </div>
 
-<button type="button"
-        class="btn btn-outline-secondary rounded-circle up-btn"
+<button type="button" class="btn btn-outline-secondary rounded-circle up-btn"
         [ngClass]="isShowUpBtn ? 'up-btn--show' : 'disabled'"
         (click)="goToTop()">
   <span class="up-btn__icon">&#8963;</span>
 </button>
 
-<!-- TODO:!!!: routerLinkActive="active" для родителя // не работает =(-->
+<!-- routerLinkActive="active" для родителя не работает =( -->

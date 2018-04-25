@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {delay, delayWhen, map, retryWhen} from 'rxjs/operators';
+import {delayWhen, map, retryWhen} from 'rxjs/operators';
 import {timer} from 'rxjs/observable/timer';
 
 import {VkTokenService} from '../../token/services/vk-token.service';
 import {AuthVkError} from '../errors/token-error';
 import {ApiError, eApiErrCode} from '../errors/api-error';
-import {createError} from '@angular/core/src/render3/instructions';
+
 
 @Injectable()
 export abstract class VkApiServiceAbstract {
@@ -37,16 +37,15 @@ export abstract class VkApiServiceAbstract {
     const url = this._requestUrl(params);
     const callbackParamName = 'callback'; // This param key. Value auto-generate
 
-    console.log('- PG:',
-      params.get('user_id') ? params.get('user_id') : params.get('owner_id'),
-      this.METHOD_URL);
-
     return this._httpClient.jsonp(url, callbackParamName).pipe(
-      delay(Math.random() * 1000),
       map(this._parseBaseResponseData),
       retryWhen(this._errorBaseRetryHandler)
     );
   }
+
+
+  // --- private --- //
+
 
   private _errorBaseRetryHandler(errors: Observable<any>): Observable<any> {
     return errors.pipe(

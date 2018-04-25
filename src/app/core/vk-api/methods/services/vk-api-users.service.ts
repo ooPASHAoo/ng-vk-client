@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {VkApiServiceAbstract} from './vk-api.service.abstract';
 import {VkUser} from '../models/vk-user.model';
 
+
 @Injectable()
 export class VkApiUsersService extends VkApiServiceAbstract {
 

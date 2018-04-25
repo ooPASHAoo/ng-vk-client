@@ -33,7 +33,9 @@ export class Stp {
     return Stp.getIsHas(this.targetObj, keys, type, isRequired);
   }
 
+
   // --- static --- //
+
 
   static getIsHas(obj: object, keys: Array<string>, type?: supTypes, isRequired: boolean = false): any {
     if (!Stp.isArr(keys) || keys.some(k => !Stp.isStr(k))) {
@@ -75,7 +77,7 @@ export class Stp {
   }
 
   static isVoid(value: any): boolean {
-    return (value === null) ||  (value === undefined);
+    return (value === null) || (value === undefined);
   }
 
   static isStr(value: any): boolean {
@@ -111,5 +113,5 @@ const funcsIsType = {
   [Boolean.name]: Stp.isBool,
   [Array.name]: Stp.isArr,
   [Object.name]: Stp.isObj,
-  [Date.name]: Stp.isDate,
+  [Date.name]: Stp.isDate
 };

@@ -8,6 +8,7 @@ import {VkMedia} from '../../../../../core/vk-api/methods/models/vk-media.model.
 import {VkMediaLink} from '../../../../../core/vk-api/methods/models/vk-media-link.model';
 import {fadeInOutAnimation} from '../../../../../shared/animations/fade-in-out.animation';
 
+
 @Component({
   selector: 'pg-post',
   templateUrl: './post.component.html',
@@ -18,13 +19,13 @@ export class PostComponent implements OnInit {
 
   @Input() post: VkPost|null;
   @Input() repostHistory: VkPost[]|null;
-  @Input() relatedUsers: { [userId: string]: VkUser };
-  @Input() relatedGroups: { [groupId: string]: VkGroup };
+  @Input() relatedUsers: {[userId: string]: VkUser};
+  @Input() relatedGroups: {[groupId: string]: VkGroup};
 
   isRepost = false;
 
-  constructor() {
-  }
+
+  constructor() {}
 
   ngOnInit() {
     // Кривоватый способ отображения репостов любой вложенности
@@ -45,7 +46,9 @@ export class PostComponent implements OnInit {
       !this.post.repostHistory;
   }
 
+
   // --- author --- //
+
 
   get authorLink(): string[]|null {
     const author = this._getAuthorById(this.post.authorId);
@@ -71,7 +74,9 @@ export class PostComponent implements OnInit {
     return author ? author.photoUrl100 : null;
   }
 
+
   // --- attachments --- //
+
 
   hasAttachmentLink(): boolean {
     return this._hasAttachmentByType(VkMediaLink.typeName);
@@ -89,7 +94,9 @@ export class PostComponent implements OnInit {
     return <VkMediaPhoto[]|null> this._getAttachmentByType(VkMediaPhoto.typeName);
   }
 
+
   // --- private --- //
+
 
   private _getAuthorById(authorId: string): VkGroup|VkUser|undefined {
     if (authorId.search('-') !== -1) {

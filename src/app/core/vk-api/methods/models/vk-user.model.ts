@@ -1,5 +1,7 @@
-import {Stp} from '../../../../shared/supports/safe-type-parser';
 import * as moment from 'moment';
+
+import {Stp} from '../../../../shared/supports/safe-type-parser';
+
 
 export class VkUser {
 
@@ -31,8 +33,6 @@ export class VkUser {
   static parseItem(userData: object): VkUser {
     const stp = new Stp(userData);
     const user = new VkUser();
-
-    // console.log('- PG:', userData);
 
     user.id = stp.get(['id'], Number, true).toString();
     user.firstName = stp.get(['first_name'], String, true);

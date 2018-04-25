@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {NotFoundComponent} from './pages/not-found/not-found.component';
-import {AppComponent} from './app.component';
 import {AuthGuard} from './shared/guards/auth-guard.service';
+
 
 const appRoutes: Routes = [
   {
@@ -27,9 +27,9 @@ const appRoutes: Routes = [
   }
 ];
 
+
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

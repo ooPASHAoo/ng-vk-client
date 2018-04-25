@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 
+
 @Component({
   selector: 'pg-about',
   templateUrl: './about.component.html',

@@ -1,5 +1,7 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+
 import {fadeInOutAnimation} from '../../../../../../shared/animations/fade-in-out.animation';
+
 
 @Component({
   selector: 'pg-user-content-menu',
@@ -7,15 +9,12 @@ import {fadeInOutAnimation} from '../../../../../../shared/animations/fade-in-ou
   styleUrls: ['./user-content-menu.component.scss'],
   animations: [fadeInOutAnimation]
 })
-export class UserContentMenuComponent implements OnChanges {
+export class UserContentMenuComponent implements OnInit {
 
   @Input() userId: string;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    const userIdChange = changes['userId'];
-  }
+  ngOnInit() {}
 
 }

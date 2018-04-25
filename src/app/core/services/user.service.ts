@@ -5,19 +5,23 @@ import {LoaderServiceAbstract} from './abstracts/loader.service.abstract';
 import {VkUser} from '../vk-api/methods/models/vk-user.model';
 import {VkApiUsersService} from '../vk-api/methods/services/vk-api-users.service';
 
+
 @Injectable()
 export class UserService extends LoaderServiceAbstract<VkUser> {
-
-  constructor(private _vkUsersService: VkApiUsersService) {
-    super();
-  }
 
   /** Read only */
   get user(): VkUser|null {
     return this._data;
   }
 
+
+  constructor(private _vkUsersService: VkApiUsersService) {
+    super();
+  }
+
+
   // --- LoaderServiceAbstract --- //
+
 
   protected _dataLoader(): Observable<VkUser> {
     return this._vkUsersService.getById(this._ownerId);

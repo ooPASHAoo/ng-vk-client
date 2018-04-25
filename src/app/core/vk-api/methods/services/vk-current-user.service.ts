@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
+
 import {VkTokenService} from '../../token/services/vk-token.service';
+
 
 @Injectable()
 export class VkCurrentUserService {

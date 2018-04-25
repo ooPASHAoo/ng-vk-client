@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+
 import {PostsListService} from '../../../../core/services/posts-list.service';
 import {UserService} from '../../../../core/services/user.service';
 import {LoaderServiceDelegate} from '../../../../core/services/abstracts/loader.service.abstract';
@@ -8,6 +9,7 @@ import {ApiError, eApiErrCode} from '../../../../core/vk-api/methods/errors/api-
 import {AuthVkError} from '../../../../core/vk-api/methods/errors/token-error';
 import {FriendsListService} from '../../../../core/services/friends-list.service';
 import {VkCurrentUserService} from '../../../../core/vk-api/methods/services/vk-current-user.service';
+
 
 @Component({
   selector: 'pg-user',
@@ -24,28 +26,25 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
   userId: string;
   userNumId: string;
 
-  get user(): VkUser {
-    return this._userService.user;
-  }
+  get user(): VkUser { return this._userService.user; }
 
   errorMsg = '';
 
-  isLoading = false;
+  isLoading = false;  // TODO: get isLoading()
   hasLoadError = false;
+
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _router: Router,
               private _currentUser: VkCurrentUserService,
               private _userService: UserService,
               private _postsService: PostsListService,
-              private _friendsService: FriendsListService) {
-  }
+              private _friendsService: FriendsListService) {}
 
   ngOnInit() {
     this._activatedRoute.paramMap
       .subscribe((paramMap) => {
         const userIdParam = paramMap.get('id');
-        console.log('----- >', userIdParam, '< -----');
         if (userIdParam === this._currentUser.getId()) {
           const childPath = this._activatedRoute.snapshot.children
             .reduce((sum, v) => {
@@ -57,7 +56,6 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
 
         this.changeUserId(userIdParam);
       });
-    // console.log('- PG:', '_T_E_S_T_');
   }
 
   changeUserId(userId: string) {
@@ -92,7 +90,6 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
       console.log('|UserComponent view log|: Страница удалена или заблокирована.');
       this.errorMsg = 'Страница удалена или заблокирована.';
     }
-
   }
 
   lsdFailureHandler(err: ApiError|AuthVkError|Error): void {
@@ -124,7 +121,6 @@ export class UserComponent implements OnInit, LoaderServiceDelegate {
     } else {
       console.warn('Ошибка при загрузке пользователя. Попробуйте еще раз.');
     }
-
   }
 
   lsdFinallyHandler(): void {

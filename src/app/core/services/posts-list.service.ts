@@ -1,19 +1,13 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
 import {VkPostsList} from '../vk-api/methods/models/vk-posts-list.model';
 import {VkApiWallService} from '../vk-api/methods/services/vk-api-wall.service';
-import {VkPost} from '../vk-api/methods/models/vk-post.model';
-import {VkGroup} from '../vk-api/methods/models/vk-group.model';
-import {VkUser} from '../vk-api/methods/models/vk-user.model';
 import {LoaderListServiceAbstract} from './abstracts/loader-list.service.abstract';
-import {Observable} from 'rxjs/Observable';
+
 
 @Injectable()
 export class PostsListService extends LoaderListServiceAbstract<VkPostsList> {
-
-  constructor(private _vkWallService: VkApiWallService) {
-    super();
-  }
 
 
   // --- getters --- //
@@ -39,6 +33,11 @@ export class PostsListService extends LoaderListServiceAbstract<VkPostsList> {
   // }
 
 
+  constructor(private _vkWallService: VkApiWallService) {
+    super();
+  }
+
+
   // --- LoaderListServiceAbstract --- //
 
 
@@ -60,7 +59,6 @@ export class PostsListService extends LoaderListServiceAbstract<VkPostsList> {
     } else if (newData) {
       this._data = newData;
     }
-
   }
 
 }

@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {VkTokenModel} from '../models/vk-token.model';
 import {VkTokenStorageService} from './vk-token-storage.service';
 
+
 @Injectable()
 export class VkTokenService {
 
@@ -29,6 +30,10 @@ export class VkTokenService {
   removeLocalToken() {
     this._tokenStorage.removeToken();
   }
+
+
+  // --- private --- //
+
 
   private _getLocalToken(): VkTokenModel|null {
     try {

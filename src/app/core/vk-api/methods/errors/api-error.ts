@@ -5,8 +5,8 @@ export enum eApiErrCode {
   DELETE_OR_BAN = 18,
   INVALID_PARAM = 100,
   INVALID_ID = 113
-
 }
+
 
 export class ApiError extends Error {
 
@@ -20,6 +20,8 @@ export class ApiError extends Error {
     // Для работы instanceof
     Object.setPrototypeOf(this, ApiError.prototype);
   }
+
 }
+
 
 // коды ошибок - https://vk.com/dev/errors

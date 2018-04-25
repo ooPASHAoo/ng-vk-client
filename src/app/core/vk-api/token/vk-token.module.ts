@@ -4,6 +4,7 @@ import {VkTokenParserService} from './services/vk-token-parser.service';
 import {VkTokenStorageService} from './services/vk-token-storage.service';
 import {VkTokenService} from './services/vk-token.service';
 
+
 @NgModule({
   providers: [
     VkTokenParserService,

@@ -1,43 +1,36 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {VkTokenService} from '../../../../../core/vk-api/token/services/vk-token.service';
+import {Router} from '@angular/router';
+
 import {ApiError, eApiErrCode} from '../../../../../core/vk-api/methods/errors/api-error';
 import {AuthVkError} from '../../../../../core/vk-api/methods/errors/token-error';
 import {PostsListService} from '../../../../../core/services/posts-list.service';
 import {LoaderServiceDelegate} from '../../../../../core/services/abstracts/loader.service.abstract';
 import {VkPostsList} from '../../../../../core/vk-api/methods/models/vk-posts-list.model';
 
+
 @Component({
   selector: 'pg-wall',
   templateUrl: './wall.component.html',
-  styleUrls: ['./wall.component.scss'],
+  styleUrls: ['./wall.component.scss']
 })
 export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
 
-  get postsList(): VkPostsList|null {
-    return this.postsService.postsList;
-  }
+  get postsList(): VkPostsList|null { return this.postsService.postsList; }
 
-  // isLoading = false;
-  get isLoading(): boolean {
-    return this.postsService.isLoading();
-  }
-
-  compName = 'wall';
+  get isLoading(): boolean { return this.postsService.isLoading(); }
 
   hasLoadError = false;
   userIdError = false;
 
   private readonly _loadScrollBottom = 3000;
 
+
   constructor(private _router: Router,
-              public postsService: PostsListService) {
-  }
+              public postsService: PostsListService) {}
 
   ngOnInit() {
     this.postsService.loaderDelegate = this;
     if (!this.postsList && !this.isLoading && this.postsService.userId) {
-      console.log('- PG:', '>>> wall: ngOnInit');
       this.postsService.refresh();
     }
   }
@@ -57,14 +50,12 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
     const scrollLeft = scrollHeight - scrollBottom;
     if (scrollLeft < this._loadScrollBottom) {
       if (!this.isLoading && this.postsService.userId) {
-        console.log('- PG:', '>>> wall: onScroll');
         this.postsService.load();
       }
     }
   }
 
   onRefresh() {
-    console.log('- PG:', '>>> wall: onRefresh');
     this.postsService.refresh();
   }
 
@@ -75,13 +66,11 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
   lsdChangeOwnerId(ownerId: string): void {
     this.userIdError = false;
     if (ownerId) {
-      console.log('- PG:', '>>> wall: lsdChangeOwnerId');
       this.postsService.refresh();
     }
   }
 
   lsdLoadInterceptor(ownerId: string): boolean {
-    // this.isLoading = true;
     return true;
   }
 
@@ -108,30 +97,11 @@ export class WallComponent implements OnInit, OnDestroy, LoaderServiceDelegate {
       ) {
         this.userIdError = true;
       }
-
-      // switch (err.code) {
-      //   case eApiErrCode.INVALID_ID: {
-      //     // this.errorMsg = 'Несуществующий id пользователя.';
-      //     console.log('Несуществующий id пользователя.');
-      //     break;
-      //   }
-      //   case eApiErrCode.ACCESS_DENIED: {
-      //     // this.errorMsg = 'Доступ запрещен.';
-      //     console.log('Доступ запрещен.');
-      //     break;
-      //   }
-      //   case eApiErrCode.DELETE_OR_BAN: {
-      //     // this.errorMsg = 'Страница удалена или заблокирована.';
-      //     console.log('Страница удалена или заблокирована.');
-      //     break;
-      //   }
-      // }
     }
 
   }
 
   lsdFinallyHandler(): void {
-    // this.isLoading = false;
   }
 
 }

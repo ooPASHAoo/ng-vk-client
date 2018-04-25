@@ -3,9 +3,10 @@ import {HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 
+import {Stp} from '../../../../shared/supports/safe-type-parser';
 import {VkApiServiceAbstract} from './vk-api.service.abstract';
 import {VkUser} from '../models/vk-user.model';
-import {Stp} from '../../../../shared/supports/safe-type-parser';
+
 
 @Injectable()
 export class VkApiFriendsService extends VkApiServiceAbstract {
@@ -28,7 +29,7 @@ export class VkApiFriendsService extends VkApiServiceAbstract {
       .set('offset', Math.min(offset, this.MAX_COUNT).toString());
 
     return this.httpJsonpGet(params).pipe(
-      map(VkApiFriendsService._parseResponse)
+      map(this._parseResponse)
     );
   }
 
@@ -37,11 +38,11 @@ export class VkApiFriendsService extends VkApiServiceAbstract {
       .set('user_id', userId);
 
     return this.httpJsonpGet(params).pipe(
-      map(VkApiFriendsService._parseResponse)
+      map(this._parseResponse)
     );
   }
 
-  private static _parseResponse(res: object): VkUser[] {
+  private _parseResponse(res: object): VkUser[] {
     return Stp.getIsHas(res, ['items'], Array, true)
       .map(VkUser.parseItem);
   }

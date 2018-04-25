@@ -1,5 +1,6 @@
 import {Stp} from '../../../../shared/supports/safe-type-parser';
 
+
 export class VkGroup {
 
   id: string;

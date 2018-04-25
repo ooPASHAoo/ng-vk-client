@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
+
 @Component({
   selector: 'pg-error-retry',
   templateUrl: './error-retry.component.html',
@@ -9,11 +10,10 @@ export class ErrorRetryComponent implements OnInit {
 
   @Output() retry = new EventEmitter<void>();
 
-  constructor() {
-  }
 
-  ngOnInit() {
-  }
+  constructor() {}
+
+  ngOnInit() {}
 
   onRetry() {
     this.retry.emit();

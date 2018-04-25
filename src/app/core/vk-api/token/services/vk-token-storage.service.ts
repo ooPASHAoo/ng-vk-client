@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 
 import {VkTokenModel} from '../models/vk-token.model';
 
+
 const STORAGE_KEY = 'PG_VK_TOKEN_STORAGE_KEY';
+
 
 @Injectable()
 export class VkTokenStorageService {
@@ -23,7 +25,9 @@ export class VkTokenStorageService {
     localStorage.removeItem(STORAGE_KEY);
   }
 
+
   // --- private --- //
+
 
   private _tokenFromJson(jsonToken: string): VkTokenModel|null {
     const objToken = JSON.parse(jsonToken) as VkTokenModel;

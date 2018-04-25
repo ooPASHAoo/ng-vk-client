@@ -7,16 +7,13 @@ import {WallComponent} from './pages/user/wall/wall.component';
 import {FriendsComponent} from './pages/user/friends/friends.component';
 
 
-// === page routes === //
-
-
 /**
  * Components: App/Main/User/UserContent/...
  * Full path: /user/:id/...
  */
 const userRootSubRoutes: Routes = [
   {path: '', component: WallComponent},
-  {path: 'friends', component: FriendsComponent},
+  {path: 'friends', component: FriendsComponent}
 ];
 
 // --- support routes --- //
@@ -39,12 +36,8 @@ const mainRoutes: Routes = [
 ];
 
 
-// --- module --- //
-
-
 @NgModule({
   imports: [RouterModule.forChild(mainRoutes)],
   exports: [RouterModule]
 })
-export class MainRoutingModule {
-}
+export class MainRoutingModule {}

@@ -21,10 +21,11 @@ import {UserCardComponent} from './shared/components/user-card/user-card.compone
 import {ErrorRetryComponent} from '../../shared/components/error-retry/error-retry.component';
 import {LoaderRectComponent} from '../../shared/components/loader-rect/loader-rect.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
-    MainRoutingModule,
+    MainRoutingModule
   ],
   declarations: [
     MainComponent,
@@ -38,19 +39,17 @@ import {LoaderRectComponent} from '../../shared/components/loader-rect/loader-re
     UserInfoComponent,
     PostsListComponent,
     PostComponent,
-
     UsersListComponent,
     UserCardComponent,
-
-    DateFormatPipe,
     PostAttachmentLinkComponent,
     PostAttachmentPhotoComponent,
     UserContentMenuComponent,
 
     SpinnerComponent,
     ErrorRetryComponent,
-    LoaderRectComponent
-  ],
+    LoaderRectComponent,
+
+    DateFormatPipe
+  ]
 })
-export class MainModule {
-}
+export class MainModule {}
