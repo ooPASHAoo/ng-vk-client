@@ -1,13 +1,18 @@
 <div class="user border mb-3" [@fadeInOut]>
   <div class="user__main">
     <div class="user__avatar avatar">
-      <img *ngIf="user" class="avatar__img"
+      <div *ngIf="!errorMsg && !isLoadedAvatar" [@fadeInOut] class="avatar__loader">
+        <pg-loader-rect></pg-loader-rect>
+      </div>
+      <img *ngIf="user"
+           class="avatar__img"
+           [ngClass]="{'avatar__img--show' : isLoadedAvatar}"
+           (load)="avatarHasLoaded()"
            src="{{user.photoUrl400 ? user.photoUrl400 :
                   user.photoUrl400orig ? user.photoUrl400orig :
                   user.photoUrl200 ? user.photoUrl200 :
                   user.photoUrl200orig}}"
       >
-      <pg-loader-rect *ngIf="!user && !errorMsg"></pg-loader-rect>
     </div>
     <div *ngIf="user" class="user__info info">
       <h2 class="info__header">{{user.firstName}} {{user.lastName}}</h2>
